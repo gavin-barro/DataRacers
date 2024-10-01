@@ -32,3 +32,15 @@ FROM Shipment
     JOIN Container ON Shipment.ShipmentID = Container.ShipmentID
 GROUP BY Shipment.ShipmentID;
 
+-- Query to find each plane shipment arrving at a certain race
+SELECT *
+FROM Shipment  
+    JOIN Race_EVENT ON RaceID
+WHERE Method = "Plane"
+
+-- Query to find the number of ships arriving at a race
+SELECT COUNT(Method)
+FROM Shipment
+WHERE Destination = "Monaco" and Method = "Ship"
+
+
