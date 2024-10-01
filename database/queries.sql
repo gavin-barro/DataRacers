@@ -9,3 +9,11 @@ SELECT TeamName
 FROM Team_Table
     JOIN Race_Event ON Team_Table.RaceID = Race_Event.RaceID
 WHERE RaceID = 57;
+
+
+-- find a container information for a race event and container
+SELECT RaceID
+FROM Race_Event
+	JOIN Shipment ON Race_Event.RaceID = Shipment.RaceID
+    JOIN Container ON Shipment.ShipmentID = Container.ShipmentID
+WHERE ConID = 12 AND RaceID = 57;
