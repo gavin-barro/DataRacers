@@ -1,46 +1,61 @@
--- query to find a team's kits (in this case the team with the ID 1234).
-SELECT *
-FROM Team_Table
-    JOIN Team_Kit ON Team_Table.TeamID = Team_Kit.TeamID
-WHERE Team_Table.TeamID = 1234;
+Table Race_Event {
+  RaceID int [pk, not null, note: 'The current race'] 
+  Location Text [not null, note: 'The location of the race']
+  Date dateTime [not null, note: 'The time of the race']
 
--- find the teams at a certain race event (race 57)
-SELECT TeamName
-FROM Team_Table
-    JOIN Race_Event ON Team_Table.RaceID = Race_Event.RaceID
-WHERE RaceID = 57;
+  note: 'This table contains general information about the race'
+}
 
 
--- find a container information for a race event and container
-SELECT RaceID
-FROM Race_Event
-	JOIN Shipment ON Race_Event.RaceID = Shipment.RaceID
-    JOIN Container ON Shipment.ShipmentID = Container.ShipmentID
-WHERE ConID = 12 AND RaceID = 57;
+Table Team {
+  TeamID int [pk, not null]
+  RaceID int [not null]
+  TeamName text [not null]
 
--- Query to find all team kits that are part of a specific container
--- in this case, container 10
-SELECT Team_Kit.*, Team_Table.TeamName
-FROM Container_contains_TeamKits
-    JOIN Team_Kit ON Container_contains_TeamKits.KitID = Team_Kit.KitID
-    JOIN Team_Table ON Team_Kit.TeamID = Team_Table.TeamID
-WHERE ConID = 10;
+  Note: 'Contains general team information'
+}
 
--- Query to find the number of containers per shipment
-SELECT Shipment.ShipmentID, COUNT(Container.ConID) AS ContainerCount
-FROM Shipment
-    JOIN Container ON Shipment.ShipmentID = Container.ShipmentID
-GROUP BY Shipment.ShipmentID;
+Table Shipment {
+  ShipmentID int [pk, not null]
+  RaceID int [not null]
+  CurrentLocation Text [not null]
+  Destination Text [not null]
+  Method text [note: 'Ship, plane, truck, submarine, etc.']
 
--- Query to find each plane shipment arrving at a certain race
-SELECT *
-FROM Shipment  
-    JOIN Race_EVENT ON RaceID
-WHERE Method = "Plane"
+  Note: 'The shipments contain all the containers'
+}
 
--- Query to find the number of ships arriving at a race
-SELECT COUNT(Method)
-FROM Shipment
-WHERE Destination = "Monaco" and Method = "Ship"
+Table Container {
+  ConID int [pk, not null]
+  ShipmentID int [not null]
+  CriticalContainer boolean [not null]
+
+  Note: 'Container can contain kits or f1 equipment'
+}
+
+Table Container_contains_Kits {
+  ConID int [not null]
+  KitID int [not null]
+}
+
+Table Race_Kit {
+  KitID int [pk, not null]
+
+  Note: 'Contains f1 equipment'
+}
+
+Table Team_Kit {
+  KitID int [not null]
+  TeamID int [not null]
+
+  Note: 'Contains individual team equipment'
+}
 
 
+Ref: Race_Event.RaceID < Team.RaceID
+Ref: Container.ConID < Container_contains_Kits.ConID
+Ref: Container_contains_Kits.KitID - Team_Kit.KitID
+Ref: Shipment.ShipmentID < Container.ShipmentID
+Ref: Race_Event.RaceID < Shipment.RaceID
+Ref: Team.TeamID < Team_Kit.TeamID
+Ref: Container_contains_Kits.KitID < Race_Kit.KitID
