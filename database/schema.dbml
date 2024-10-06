@@ -1,4 +1,4 @@
-able Race_Event {
+Table Race_Event {
   RaceID int [pk, not null, note: 'The current race'] 
   Location Text [not null, note: 'The location of the race']
   Date dateTime [not null, note: 'The time of the race']
