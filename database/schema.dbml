@@ -1,11 +1,11 @@
-Table Race_Event {
+able Race_Event {
   RaceID int [pk, not null, note: 'The current race'] 
   Location Text [not null, note: 'The location of the race']
   Date dateTime [not null, note: 'The time of the race']
+  Creator int [not null]
 
   note: 'This table contains general information about the race'
 }
-
 
 Table Team {
   TeamID int [pk, not null]
@@ -21,6 +21,8 @@ Table Shipment {
   CurrentLocation Text [not null]
   Destination Text [not null]
   Method text [note: 'Ship, plane, truck, submarine, etc.']
+  CreatedBy int [not null, note: 'showes Race Event Organizer ID']
+  Status text [not null]
 
   Note: 'The shipments contain all the containers'
 }
@@ -29,39 +31,65 @@ Table Container {
   ConID int [pk, not null]
   ShipmentID int [not null]
   CriticalContainer boolean [not null]
+  Status text [not null]
+  UpdatedBy int [not null]
 
   Note: 'Container can contain kits or f1 equipment'
 }
 
-Table Container_contains_TeamKits {
-  ConID int [not null]
-  KitID int [not null]
-}
-
-Table Container_contains_RaceKits {
-  ConID int [not null]
-  KitID int [not null]
-}
-
-Table Race_Kit {
+Table ContainerContents {
+  ConID int [pk, not null]
   KitID int [pk, not null]
-
-  Note: 'Contains f1 equipment'
 }
 
-Table Team_Kit {
+Table Kit {
+  KitID int [pk, not null]
+  OwnerID int [pk, not null]
+  TypeOfKit boolean [not null]
+  TeamID int [not null]
+  Contents text [not null]
+  KitSize text [not null, note: 'small, medium, large']
+}
+
+
+Table Race_Event_Organizer {
+  OrganizerID int [pk, not null]
+  Name text [not null]
+  Permisions text [not null]
+}
+
+
+Table Person {
+  PersonID int [pk , not null]
+  Name text [not null]
   KitID int [not null]
+  PhoneNum text [not null]
+  Permisions text [not null]
+}
+
+Table TeamKit_Manager {
+  PersonID int [pk, not null]
   TeamID int [not null]
 
-  Note: 'Contains individual team equipment'
+  Note: 'The person who manages the teams kits'
+}
+
+Table RaceCrew_Member {
+  PersonID int [pk, not null]
+  Role text [not null]
+
+  Note: 'Inbound, on site, or Outbound as role, The person who manages the teams kits'
 }
 
 
 Ref: Race_Event.RaceID < Team.RaceID
-Ref: Container.ConID < Container_contains_TeamKits.ConID
-Ref: Container_contains_TeamKits.KitID - Team_Kit.KitID
+Ref: Container.ConID < ContainerContents.ConID
+Ref: ContainerContents.KitID < Kit.KitID
 Ref: Shipment.ShipmentID < Container.ShipmentID
 Ref: Race_Event.RaceID < Shipment.RaceID
-Ref: Team.TeamID < Team_Kit.TeamID
-Ref: Container.ConID < Container_contains_RaceKits.ConID
-Ref: Container_contains_RaceKits.KitID < Race_Kit.KitID
+Ref: Person.PersonID - TeamKit_Manager.PersonID
+Ref: Race_Event_Organizer.OrganizerID - Race_Event.Creator
+Ref: Race_Event_Organizer.OrganizerID < Shipment.CreatedBy
+Ref: Person.PersonID - RaceCrew_Member.PersonID
+Ref: Team.TeamID - TeamKit_Manager.TeamID
+Ref: Person.PersonID - Kit.OwnerID
