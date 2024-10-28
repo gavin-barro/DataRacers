@@ -1,0 +1,11 @@
+TeamID,RaceID,TeamName
+1,1098,Oracle Red Bull Racing,Christian Horner
+2,1098,Mercedes-AMG Petronas F1 Team,Toto Wolff,
+3,1098,Scuderia Ferrari,Mattia Binotto
+4,1098,McLaren Formula 1 Team,Andreas Seidl
+5,1098,Aston Martin Aramco Cognizant F1 Team,Mike Crack
+6,1098,BWT Alpine F1 Team,Otmar Szafneuer
+7,1098,Williams Racing,Jost Capito
+8,1098,Scuderia AlphaTauri,Franz Tost
+9,1098,Alfa Romeo F1 Team Stake,Frédéric Vasseur
+10,1098,MoneyGram Haas F1 Team,Guenther Steiner
