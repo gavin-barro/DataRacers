@@ -1,0 +1,1 @@
+\copy "Race_Event" FROM '../data/raceEvent.csv' CSV HEADER
