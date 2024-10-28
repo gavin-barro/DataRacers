@@ -8,3 +8,7 @@ https://github.com/toUpperCase78/formula1-datasets/blob/master/Formula1_2023seas
 - 
 
 Fake Data
+- kits
+- parts of the shipments
+- kit and kit contents
+- race crew members
