@@ -1,5 +1,5 @@
 Table Race_Event {
-  RaceID int [pk, not null, note: 'The current race'] 
+  RaceID int [unique, pk, not null, note: 'The current race'] 
   Location Text [not null, note: 'The location of the race']
   Date dateTime [not null, note: 'The time of the race']
   Creator int [not null]
@@ -8,7 +8,7 @@ Table Race_Event {
 }
 
 Table Team {
-  TeamID int [pk, not null]
+  TeamID int [unique, pk, not null]
   RaceID int [not null]
   TeamName text [not null]
 
@@ -16,7 +16,7 @@ Table Team {
 }
 
 Table Shipment {
-  ShipmentID int [pk, not null]
+  ShipmentID int [unique, pk, not null]
   RaceID int [not null]
   CurrentLocation Text [not null]
   Destination Text [not null]
@@ -28,7 +28,7 @@ Table Shipment {
 }
 
 Table Container {
-  ConID int [pk, not null]
+  ConID int [unique, pk, not null]
   ShipmentID int [not null]
   CriticalContainer boolean [not null]
   Status text [not null]
@@ -38,29 +38,29 @@ Table Container {
 }
 
 Table ContainerContents {
-  ConID int [pk, not null]
-  KitID int [pk, not null]
+  ConID int [unique, pk, not null]
+  KitID int [unique, pk, not null]
 }
 
 Table Kit {
-  KitID int [pk, not null]
-  OwnerID int [pk, not null]
+  KitID int [unique, pk, not null]
+  OwnerID int [unique, pk, not null]
   TypeOfKit boolean [not null]
   TeamID int [not null]
-  Contents text [not null]
-  KitSize text [not null, note: 'small, medium, large']
+  TotalWeight int [not null]
+  KitSize text [note: 'small, medium, large']
 }
 
 
 Table Race_Event_Organizer {
-  OrganizerID int [pk, not null]
+  OrganizerID int [unique, pk, not null]
   Name text [not null]
   Permisions text [not null]
 }
 
 
 Table Person {
-  PersonID int [pk , not null]
+  PersonID int [unique, pk , not null]
   Name text [not null]
   KitID int [not null]
   PhoneNum text [not null]
@@ -68,19 +68,25 @@ Table Person {
 }
 
 Table TeamKit_Manager {
-  PersonID int [pk, not null]
+  PersonID int [unique, pk, not null]
   TeamID int [not null]
 
   Note: 'The person who manages the teams kits'
 }
 
 Table RaceCrew_Member {
-  PersonID int [pk, not null]
+  PersonID int [unique, pk, not null]
   Role text [not null]
 
   Note: 'Inbound, on site, or Outbound as role, The person who manages the teams kits'
 }
 
+Table KitContents {
+  KitID int [unique, pk, not null]
+  PartID int [not null]
+  PartDesc text [not null]
+  PartWeight int [not null]
+}
 
 Ref: Race_Event.RaceID < Team.RaceID
 Ref: Container.ConID < ContainerContents.ConID
@@ -93,3 +99,5 @@ Ref: Race_Event_Organizer.OrganizerID < Shipment.CreatedBy
 Ref: Person.PersonID - RaceCrew_Member.PersonID
 Ref: Team.TeamID - TeamKit_Manager.TeamID
 Ref: Person.PersonID - Kit.OwnerID
+Ref: Team.TeamID < Kit.TeamID
+Ref: Kit.KitID < KitContents.KitID
