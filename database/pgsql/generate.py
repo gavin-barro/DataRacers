@@ -50,7 +50,10 @@ def main():
         x += 1
     
     temp_info = []
-    
+	with open('raceEvent.csv', mode ='r')as file:
+		csvFile = csv.reader(file)
+		for lines in csvFile:
+			temp_info.append(lines)
     
 
 
