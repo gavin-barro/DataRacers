@@ -28,7 +28,6 @@ def main():
     
     european_names = [euro_fake.name() for _ in range(50)]
 
-
     # Generate fake people
     persons = []
     j = STARTING_PID
