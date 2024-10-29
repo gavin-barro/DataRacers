@@ -1,0 +1,47 @@
+ShipmentID,RaceID,CurrentLocation,Destination,Method,CreatedBy,Status
+5000,1098,Store House,Bahrain Grand Prix,submarine,10,Not Left
+5001,1099,Bahrain Grand Prix,Saudi Arabian Grand Prix,truck,11,In Transit
+5002,1100,Saudi Arabian Grand Prix,Australian Grand Prix,boat,10,Arrived
+5003,1101,Australian Grand Prix,Azerbaijan Grand Prix,airplane,12,Not Left
+5004,1102,Azerbaijan Grand Prix,Miami Grand Prix,airplane,11,Not Left
+5005,1104,Miami Grand Prix,Monaco Grand Prix,submarine,10,Not Left
+5006,1105,Monaco Grand Prix,Spanish Grand Prix,submarine,12,Not Left
+5007,1106,Spanish Grand Prix,Canadian Grand Prix,submarine,11,Arrived
+5008,1107,Canadian Grand Prix,Austrian Grand Prix,boat,10,Not Left
+5009,1108,Austrian Grand Prix,British Grand Prix,truck,11,Not Left
+5010,1109,British Grand Prix,Hungarian Grand Prix,boat,10,Arrived
+5011,1110,Hungarian Grand Prix,Belgian Grand Prix,truck,12,Arrived
+5012,1111,Belgian Grand Prix,Dutch Grand Prix,truck,11,In Transit
+5013,1112,Dutch Grand Prix,Italian Grand Prix,boat,11,Not Left
+5014,1113,Italian Grand Prix,Singapore Grand Prix,submarine,11,Arrived
+5015,1114,Singapore Grand Prix,Japanese Grand Prix,submarine,12,In Transit
+5016,1115,Japanese Grand Prix,Qatar Grand Prix,submarine,10,Not Left
+5017,1116,Qatar Grand Prix,United States Grand Prix,truck,12,Not Left
+5018,1117,United States Grand Prix,Mexico City Grand Prix,boat,11,In Transit
+5019,1118,Mexico City Grand Prix,São Paulo Grand Prix,submarine,11,In Transit
+5020,1119,São Paulo Grand Prix,Las Vegas Grand Prix,boat,11,In Transit
+5021,1120,Las Vegas Grand Prix,Abu Dhabi Grand Prix,submarine,12,Arrived
+5022,1121,Abu Dhabi Grand Prix,Bahrain Grand Prix,submarine,10,In Transit
+5023,1122,Bahrain Grand Prix,Saudi Arabian Grand Prix,submarine,10,In Transit
+5024,1123,Saudi Arabian Grand Prix,Australian Grand Prix,airplane,10,In Transit
+5025,1124,Australian Grand Prix,Japanese Grand Prix,submarine,12,Arrived
+5026,1125,Japanese Grand Prix,Chinese Grand Prix,boat,11,Not Left
+5027,1126,Chinese Grand Prix,Miami Grand Prix,submarine,11,In Transit
+5028,1127,Miami Grand Prix,Emilia Romagna Grand Prix,boat,12,Arrived
+5029,1128,Emilia Romagna Grand Prix,Monaco Grand Prix,truck,12,In Transit
+5030,1129,Monaco Grand Prix,Canadian Grand Prix,truck,11,In Transit
+5031,1130,Canadian Grand Prix,Spanish Grand Prix,airplane,10,Arrived
+5032,1131,Spanish Grand Prix,Austrian Grand Prix,submarine,11,Not Left
+5033,1132,Austrian Grand Prix,British Grand Prix,truck,12,In Transit
+5034,1133,British Grand Prix,Hungarian Grand Prix,submarine,11,Arrived
+5035,1134,Hungarian Grand Prix,Belgian Grand Prix,airplane,10,Not Left
+5036,1135,Belgian Grand Prix,Dutch Grand Prix,boat,10,In Transit
+5037,1136,Dutch Grand Prix,Italian Grand Prix,boat,10,Arrived
+5038,1137,Italian Grand Prix,Azerbaijan Grand Prix,truck,12,Not Left
+5039,1138,Azerbaijan Grand Prix,Singapore Grand Prix,submarine,12,Arrived
+5040,1139,Singapore Grand Prix,United States Grand Prix,boat,12,In Transit
+5041,1140,United States Grand Prix,Mexico City Grand Prix,submarine,10,Not Left
+5042,1141,Mexico City Grand Prix,São Paulo Grand Prix,boat,11,Arrived
+5043,1142,São Paulo Grand Prix,Las Vegas Grand Prix,submarine,11,Arrived
+5044,1143,Las Vegas Grand Prix,Qatar Grand Prix,truck,12,Not Left
+5045,1144,Qatar Grand Prix,Abu Dhabi Grand Prix,submarine,10,Not Left
