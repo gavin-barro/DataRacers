@@ -13,6 +13,9 @@ def main():
 	curr_id = 5000
 	prev_location = ""
 	temp_info.pop(0)
+	
+	con = psycopg.connect(host="localhost", user="dr", dbname="dr")
+	cur = con.cursor()
 
 	for line in temp_info:
 		temp = []
@@ -39,17 +42,12 @@ def main():
 
 		# apply status
 		temp.append(getStatus())
- 
+
 		# appends temp list to final_info list
-		final_info.append(temp)
-	con = psycopg.connect(host="localhost", user="dr", dbname="dr")
-	cur = con.cursor()
+		print(temp)
+		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
 
-	for line in final_info:
-		print(line)
-		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', line)
-
-	
+		
 
 def getStatus():
 	return random.choice(["Arrived", "In Transit", "Not Left"])
