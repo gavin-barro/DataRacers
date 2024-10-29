@@ -20,10 +20,12 @@ def main():
 	for line in temp_info:
 		temp = []
 		# gets shipment id
-		temp.append(str(curr_id))
+		temp.append(curr_id)
 		curr_id += 1
+
 		# gets race id
-		temp.append(line[0])
+		temp.append(int(line[0]))
+
 		# sets current and new destination
 		if len(prev_location) == 0:
 			temp.append("Store House")
@@ -38,7 +40,7 @@ def main():
 		temp.append(getRandomTransport())
 
 		# created by
-		temp.append(line[3])
+		temp.append(int(line[3]))
 
 		# apply status
 		temp.append(getStatus())
@@ -46,7 +48,8 @@ def main():
 		# appends temp list to final_info list
 		print(temp)
 		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
-
+	
+	con.commit()
 		
 
 def getStatus():
