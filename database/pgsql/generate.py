@@ -10,6 +10,8 @@ STARTING_KID = 1 # Initial Value of Kit ID
 NUM_TEAMS = 10 # number of teams
 NUM_KITS = 50
 MAX_KIT_WEIGHT = 1000
+NUM_CONT = 10 # number of containers
+MAX_KITS_CONTAINED = 5 # max number of kits in a container (can change this later)
 
 # Set of permissions for Persons. We can change this as needed
 permissions = ["all", "change_kits", "change_containers", "change_shipping"]
@@ -63,8 +65,30 @@ def main():
             random.randint(1, MAX_KIT_WEIGHT),
             sizes[random.randint(0, 2)]
         )
-        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
+        # cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
 
+    # generate containers with kit(s) in them
+    """
+    for i in range(NUM_CONT):
+        kits_contained = random.randint(1, MAX_KITS_CONTAINED)
+        for j in range(kits_contained):
+            temp = []
+            temp.append(container_id)
+            temp.append(starting_kit_id)
+            cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
+            starting_kit_id += 1
+        container_id += 1
+    """
+    # someone run this when containers is put into database
+    starting_kit_id = 5000
+    container_id = 6001
+
+    for i in range(NUM_CONT):
+        temp = [container_id, starting_kit_id]
+        cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
+        starting_kit_id += 1
+        container_id += 1
+        
     con.commit()
 
 if __name__ == "__main__":
