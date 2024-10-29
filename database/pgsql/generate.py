@@ -8,6 +8,8 @@ NUM_PEOPLE = 100 # Number of people
 STARTING_PID = 1 # Initial value of PersonID, IDs will increment incrementally from here
 STARTING_KID = 1 # Initial Value of Kit ID
 NUM_TEAMS = 10 # number of teams
+NUM_KITS = 50
+MAX_KIT_WEIGHT = 1000
 
 # Set of permissions for Persons. We can change this as needed
 permissions = ["all", "change_kits", "change_containers", "change_shipping"]
@@ -40,14 +42,28 @@ def main():
             permissions[random.randint(0, 2)]
         )
         j+=1
-        cur.execute('INSERT INTO "Person" VALUES (%s, %s, %s, %s, %s)', person)
+        #cur.execute('INSERT INTO "Person" VALUES (%s, %s, %s, %s, %s)', person)
 
     # Generate Team Kit Managers
     x = 1
     for i in range(1, NUM_TEAMS + 1):
         person = (x, i)
-        cur.execute('INSERT INTO "TeamKit_Manager" VALUES(%s, %s)', person)
+        #cur.execute('INSERT INTO "TeamKit_Manager" VALUES(%s, %s)', person)
         x += 1
+
+    # Generate Kits
+    starting_kit_id = 5000
+    sizes = ("small", "medium", "large")
+    for i in range(0, NUM_KITS):
+        kit = (
+            starting_kit_id + i,
+            random.randint(0, NUM_PEOPLE), # OwnerID
+            random.choice([True, False]),   
+            random.randint(1, 10),         # Team ID
+            random.randint(1, MAX_KIT_WEIGHT),
+            sizes[random.randint(0, 2)]
+        )
+        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
 
     con.commit()
 
