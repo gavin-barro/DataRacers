@@ -1,5 +1,6 @@
 import csv
 import random
+import psycopg
 
 def main():
 	temp_info = []
@@ -16,7 +17,7 @@ def main():
 	for line in temp_info:
 		temp = []
 		# gets shipment id
-		temp.append(curr_id)
+		temp.append(str(curr_id))
 		curr_id += 1
 		# gets race id
 		temp.append(line[0])
@@ -41,14 +42,13 @@ def main():
  
 		# appends temp list to final_info list
 		final_info.append(temp)
-	
+	con = psycopg.connect(host="localhost", user="dr", dbname="dr")
+	cur = con.cursor()
 
-	header = ["ShipmentID", "RaceID", "CurrentLocation", "Destination", "Method", "CreatedBy", "Status"]
-	with open ("ShipmentInfo.csv", "w", encoding='UTF8', newline = '') as f:
-		writer = csv.writer(f)
+	for line in final_info:
+		print(line)
+		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', line)
 
-		writer.writerow(header)
-		writer.writerows(final_info)
 	
 
 def getStatus():
