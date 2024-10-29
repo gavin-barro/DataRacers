@@ -48,26 +48,8 @@ def main():
         person = (x, i)
         cur.execute('INSERT INTO "TeamKit_Manager" VALUES(%s, %s)', person)
         x += 1
-    
-    temp_info = []
-	with open('raceEvent.csv', mode ='r')as file:
-		csvFile = csv.reader(file)
-		for lines in csvFile:
-			temp_info.append(lines)
-    
-
-
 
     con.commit()
-
-def getStatus():
-	return random.choice(["Arrived", "In Transit", "Not Left"])
-
-
-def getRandomTransport():
-	trans = ["airplane", "truck", "boat", "submarine"]
-	return random.choice(trans)
-
 
 if __name__ == "__main__":
     main()
