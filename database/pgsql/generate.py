@@ -47,17 +47,17 @@ def main():
             permissions[random.randint(0, 2)]
         )
         j+=1
-        #cur.execute('INSERT INTO "Person" VALUES (%s, %s, %s, %s, %s)', person)
-    #con.commit()
+        cur.execute('INSERT INTO "Person" VALUES (%s, %s, %s, %s, %s)', person)
+    con.commit()
 
     # Generate Team Kit Managers
     x = 1
     for i in range(1, NUM_TEAMS + 1):
         person = (x, i)
-        #cur.execute('INSERT INTO "TeamKit_Manager" VALUES(%s, %s)', person)
+        cur.execute('INSERT INTO "TeamKit_Manager" VALUES(%s, %s)', person)
         x += 1
-    #con.commit()
-
+    con.commit()
+    '''
     # Generate Kits
     starting_kit_id = 5000
     sizes = ("small", "medium", "large")
@@ -71,8 +71,9 @@ def main():
             random.randint(1, MAX_KIT_WEIGHT),
             sizes[random.randint(0, 2)]
         )
-        #cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
+        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
     # generate containers with kit(s) in them
+    
     con.commit()
     for i in range(NUM_CONT):
         kits_contained = random.randint(1, MAX_KITS_CONTAINED)
@@ -82,19 +83,19 @@ def main():
             temp.append(starting_kit_id)
             #cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
             starting_kit_id += 1
-    #con.commit()
+    con.commit()
     # someone run this when containers is put into database
-    
+    '''
     starting_kit_id = 5000
     container_id = 6001
 
     for i in range(NUM_CONT):
         temp = [starting_kit_id, starting_kit_id]
-        #cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
+        cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
         starting_kit_id += 1
         container_id += 1
         
-    #con.commit()
+    con.commit()
     
     #Generate KitContents
     starting_part_id = 50
@@ -108,5 +109,19 @@ def main():
         )
         cur.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s)', temp)
     con.commit()
+
+        starting_kit_id = 5000
+    sizes = ("small", "medium", "large")
+    for i in range(0, NUM_KITS):
+        kit = (
+            starting_kit_id + i,
+            #random.randint(0, NUM_PEOPLE), # OwnerID
+            i + 1,
+            random.choice([True, False]),   
+            random.randint(1, 10),         # Team ID
+            random.randint(1, MAX_KIT_WEIGHT),
+            sizes[random.randint(0, 2)]
+        )
+        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
 if __name__ == "__main__":
     main()
