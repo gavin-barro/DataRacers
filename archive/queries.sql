@@ -55,3 +55,11 @@ WHERE Container.Status = 'Unloaded'
 	AND Shipment.Status = "Arrived"
 	AND Shipment.CurrentLocation = "London"
 GROUP BY TeamName, KitID
+
+-- Query to count all the critical containers that have arrived at a event
+SELECT RaceID, COUNT(ConID)
+FROM Race_Event
+JOIN Shipment USING RaceID
+JOIN Container USING ConID
+WHERE Container.Status = "Arrived" AND
+	Container.CriticalContainer = True;
