@@ -31,13 +31,13 @@ CREATE TABLE "Container" (
 
 CREATE TABLE "ContainerContents" (
   "ConID" int UNIQUE NOT NULL,
-  "KitID" int UNIQUE NOT NULL,
+  "KitID" int NOT NULL,
   PRIMARY KEY ("ConID", "KitID")
 );
 
 CREATE TABLE "Kit" (
   "KitID" int UNIQUE NOT NULL,
-  "OwnerID" int UNIQUE NOT NULL,
+  "OwnerID" int NOT NULL,
   "TypeOfKit" boolean NOT NULL,
   "TeamID" int NOT NULL,
   "TotalWeight" int NOT NULL,

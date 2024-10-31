@@ -7,7 +7,7 @@ num_shipments = 46
 
 def main():
 	temp_info = []
-	with open('raceEvent.csv', mode ='r')as file:
+	with open('../data/raceEvent.csv', mode ='r')as file:
 		csvFile = csv.reader(file)
 		for lines in csvFile:
 			temp_info.append(lines)
@@ -49,7 +49,7 @@ def main():
 		temp.append(get_status())
 
 		# appends temp list to final_info list
-		#cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
+		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
 	
 	container_id = 6000
 	curr_shipid = 5000
