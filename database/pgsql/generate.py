@@ -87,10 +87,23 @@ def main():
     # someone run this when containers is put into database
     '''
     starting_kit_id = 5000
+    sizes = ("small", "medium", "large")
+    for i in range(0, NUM_KITS):
+        kit = (
+            starting_kit_id + i,
+            #random.randint(0, NUM_PEOPLE), # OwnerID
+            i + 1,
+            random.choice([True, False]),   
+            random.randint(1, 10),         # Team ID
+            random.randint(1, MAX_KIT_WEIGHT),
+            sizes[random.randint(0, 2)]
+        )
+        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
+    starting_kit_id = 5000
     container_id = 6001
 
     for i in range(NUM_CONT):
-        temp = [starting_kit_id, starting_kit_id]
+        temp = [container_id, starting_kit_id]
         cur.execute('INSERT INTO "ContainerContents" VALUES (%s, %s)', temp)
         starting_kit_id += 1
         container_id += 1
@@ -110,18 +123,6 @@ def main():
         cur.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s)', temp)
     con.commit()
 
-        starting_kit_id = 5000
-    sizes = ("small", "medium", "large")
-    for i in range(0, NUM_KITS):
-        kit = (
-            starting_kit_id + i,
-            #random.randint(0, NUM_PEOPLE), # OwnerID
-            i + 1,
-            random.choice([True, False]),   
-            random.randint(1, 10),         # Team ID
-            random.randint(1, MAX_KIT_WEIGHT),
-            sizes[random.randint(0, 2)]
-        )
-        cur.execute('INSERT INTO "Kit" VALUES(%s, %s, %s, %s, %s, %s)', kit)
+
 if __name__ == "__main__":
     main()

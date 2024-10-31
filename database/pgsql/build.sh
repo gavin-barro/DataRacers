@@ -18,7 +18,10 @@ echo Loading data...
 $CMD < load.sql
 
 echo Generating data...
+python create_shipment.py
 python generate.py
+
+
 
 echo Adding constraints...
 $CMD < alter.sql
