@@ -34,3 +34,19 @@ CREATE VIEW UpcomingCriticalShipments AS
 		AND '2024-12-31'  
 	    AND s."Status" = 'Not Left'                      
 	    AND c."CriticalContainer" = TRUE; 
+
+---View Kits that are over the maximum weight (10 in this example),
+---and the information of the person responsible for the kit
+CREATE VIEW "OverweightKits" AS
+SELECT
+	c."ConID" as "Container ID",
+	k."KitID" as "Kit ID",
+	k."TypeOfKit" as "Type Of Kit",
+	k."TotalWeight" as "Weight of Kit",
+	p."Name" as "Owner of Kit",
+	p."PhoneNum" as "Owner Phone Number"
+FROM "Container" c
+	JOIN "ContainerContents" cc ON c."ConID" = cc."ConID"
+	JOIN "Kit" k ON k."KitID" = cc."KitID"
+	JOIN "Person" p ON k."OwnerID" = p."PersonID"
+WHERE k."TotalWeight" > 10
