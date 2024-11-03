@@ -1,4 +1,4 @@
-"""Web app for madiSTEM Workshop Management."""
+"""Web app for F1DB Workshop Management."""
 
 from flask import Flask, render_template
 

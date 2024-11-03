@@ -30,7 +30,8 @@ def raceevent_edit(key):
             db.raceevent_ins(values)
             flash("Race Event inserted")
         elif action == "Update":
-            flash("Update not implemented")
+            db.raceevent_upd(key, values)
+            flash("Race Event updated")
         elif action == "Delete":
             db.raceevent_del(key)
             flash("Race Event deleted")
