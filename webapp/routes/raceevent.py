@@ -1,7 +1,7 @@
 """Routes for viewing/editing the Race Events table."""
 
 from app import app
-import queries.workshop as db
+import queries.raceevent as db
 from flask import render_template, request, flash, redirect
 
 

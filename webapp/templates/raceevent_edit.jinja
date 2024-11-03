@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ "Add" if key == "new" else "Edit" }} Race Event</title>
+</head>
+<body>
+    <h1>{{ "Add" if key == "new" else "Edit" }} Race Event</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            RaceID:<br>
+            <input name="RaceID" type="text" value="{{ values[0] }}">
+        </p>
+        <p>
+            Location:<br>
+            <input name="Location" type="text" value="{{ values[1] }}">
+        </p>
+        <p>
+            Date:<br>
+            <input name="Date" type="text" value="{{ values[2] }}">
+        </p>
+        <p>
+            CreatorID:<br>
+            <input name="CreatorID" type="text" value="{{ values[3] }}">
+        </p>
+
+        {% if key == "new" %}
+        <p>
+            <input name="action" type="submit" value="Insert" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+        </p>
+        {% else %}
+        <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+            <input name="action" type="submit" value="Delete" style="color: red">
+        </p>
+        {% endif %}
+    </form>
+</body>
+</html>
