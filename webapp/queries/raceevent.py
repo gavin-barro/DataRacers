@@ -24,6 +24,13 @@ def raceevent_ins(values):
                         '(%s, %s, %s, %s)', values)
             return cur.rowcount
 
+def raceevent_upd(key, values):
+    with db_connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute('UPDATE "Race_Event" SET "RaceID" = %s, "Location" = %s, '
+                        '"Date" = %s, "Creator" = %s', values + [key])
+            return cur.rowcount
+
 
 def raceevent_del(key):
     with db_connect() as conn:
