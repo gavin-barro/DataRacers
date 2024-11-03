@@ -5,36 +5,36 @@ import queries.raceevent as db
 from flask import render_template, request, flash, redirect
 
 
-@app.route("/workshop")
+@app.route("/raceevent")
 def workshop_all():
-    data = db.workshop_all()
-    return render_template("workshop_all.jinja", data=data)
+    data = db.raceevent_all()
+    return render_template("race_event_all.jinja", data=data)
 
 
-@app.route("/workshop/<key>")
-def workshop_edit(key):
+@app.route("/raceevent/<key>")
+def raceevent_edit(key):
 
     # If the form was not submitted
     if not request.args:
         if key == "new":
             values = []
         else:
-            values = db.workshop_get(key)
-        return render_template("workshop_edit.jinja", key=key, values=values)
+            values = db.raceevent_get(key)
+        return render_template("raceevent_edit.jinja", key=key, values=values)
 
     # Perform the requested action
     values = list(request.args.values())
     action = values.pop()
     try:
         if action == "Insert":
-            db.workshop_ins(values)
-            flash("Workshop inserted")
+            db.raceevent_ins(values)
+            flash("Race Event inserted")
         elif action == "Update":
             flash("Update not implemented")
         elif action == "Delete":
-            db.workshop_del(key)
-            flash("Workshop deleted")
+            db.raceevent_del(key)
+            flash("Race Event deleted")
     except Exception as e:
         flash(str(e))
-        return render_template("workshop_edit.jinja", key=key, values=values)
-    return redirect("/workshop")
+        return render_template("raceevent_edit.jinja", key=key, values=values)
+    return redirect("/raceevent")
