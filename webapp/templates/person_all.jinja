@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Persons</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Persons</h1>
+    <p><a href="/">Home</a></p>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+    {% if data %}
+    <div id="table_div"></div>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'ID');
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Kit ID');
+            data.addColumn('string', 'Phone Number');
+            data.addColumn('string', 'Permissions');
+
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, { showRowNumber: true, page: true, pageSize: 25 });
+
+            google.visualization.events.addListener(table, "select", function() {
+                let selection = table.getSelection();
+                let item = selection[0];
+                if (item) {
+                    let id = data.getValue(item.row, 0);
+                    window.location.href = 'person/' + id;
+                }
+            });
+        }
+    </script>
+    {% endif %}
+    <p>
+        <button onclick="window.location.href = 'person/new'">Add Person</button>
+    </p>
+</body>
+</html

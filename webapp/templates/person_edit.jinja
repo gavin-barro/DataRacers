@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ "Add" if key == "new" else "Edit" }} Person </title>
+</head>
+<body>
+    <h1>{{ "Add" if key == "new" else "Edit" }} Person</h1>
+    <p><a href="/">Home</a></p>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            PersonID:<br>
+            <input name="PersonID" type="text" value="{{ values[0] }}">
+        </p>
+        <p>
+            Name:<br>
+            <input name="Name" type="text" value="{{ values[1] }}">
+        </p>
+        <p>
+            KitID:<br>
+            <input name="KitID" type="text" value="{{ values[2] }}">
+        </p>
+        <p>
+            Phone Number:<br>
+            <input name="PhoneNumber" type="text" value="{{ values[3] }}">
+        </p>
+        <p>
+            Permissions:<br>
+            <input name="Peromissions" type = "text" value ="{{values[4]}}">
+        </p>
+
+        {% if key == "new" %}
+        <p>
+            <input name="action" type="submit" value="Insert" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+        </p>
+        {% else %}
+        <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+            <input name="action" type="submit" value="Delete" style="color: red">
+        </p>
+        {% endif %}
+    </form>
+</body>
+</html>
