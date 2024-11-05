@@ -6,13 +6,13 @@ from flask import render_template, request, flash, redirect
 
 
 @app.route("/shipment")
-def person_all():
+def workshop_all():
     data = db.shipment_all()
     return render_template("shipment_all.jinja", data=data)
 
 
 @app.route("/shipment/<key>")
-def person_edit(key):
+def shipment_edit(key):
 
     # If the form was not submitted
     if not request.args:
