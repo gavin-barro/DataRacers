@@ -38,4 +38,4 @@ def shipment_edit(key):
     except Exception as e:
         flash(str(e))
         return render_template("shipment_edit.jinja", key=key, values=values)
-    return redirect("/person")
+    return redirect("/shipment")
