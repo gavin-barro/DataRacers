@@ -1,12 +1,12 @@
 """Routes for viewing/editing the Shipment table."""
 
 from app import app
-import queries.person as db
+import queries.shipment as db
 from flask import render_template, request, flash, redirect
 
 
 @app.route("/shipment")
-def workshop_all():
+def show_shipment_all():
     data = db.shipment_all()
     return render_template("shipment_all.jinja", data=data)
 
@@ -19,7 +19,7 @@ def shipment_edit(key):
         if key == "new":
             values = []
         else:
-            values = db.person_get(key)
+            values = db.shipment_get(key)
         return render_template("shipment_edit.jinja", key=key, values=values)
 
     # Perform the requested action

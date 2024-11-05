@@ -1,6 +1,5 @@
 from . import db_connect
 
-
 def shipment_all():
     with db_connect() as conn:
         with conn.cursor() as cur:
@@ -17,7 +16,7 @@ def shipment_ins(values):
     with db_connect() as conn:
         with conn.cursor() as cur:
             cur.execute('INSERT INTO "Shipment" VALUES '
-                        '(%s, %s, %s, %s, %s, %s ,%s()', values)
+                        '(%s, %s, %s, %s, %s, %s ,%s)', values)
             return cur.rowcount
         
 def shipment_del(key):
