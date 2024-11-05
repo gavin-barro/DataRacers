@@ -17,8 +17,8 @@ def container_get(key):
 def container_ins(values):
     with db_connect() as conn:
         with conn.cursor() as cur:
-            cur.execute('INSERT INTO "Container" ("ConID", "ShipmentID", "CriticalContainer", "Status", "UpdatedBy") '
-                        'VALUES (%s, %s, %s, %s, %s)', values)
+            cur.execute('INSERT INTO "Container" VALUES '
+                        ' (%s, %s, %s, %s, %s)', values)
             return cur.rowcount
 
 def container_upd(key, values):
@@ -34,6 +34,6 @@ def container_del(key):
             cur.execute('DELETE FROM "Container" WHERE "ConID" = %s', [key])
             return cur.rowcount
 
-if __name__ == "__main__":
-    print("==== First 3 Containers ====")
-    print(container_all()[:3])
+# if __name__ == "__main__":
+#     print("==== First 3 Containers ====")
+#     print(container_all()[:3])
