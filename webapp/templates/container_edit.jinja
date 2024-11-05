@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ "Add" if key == "new" else "Edit" }} Container</title>
+</head>
+<body>
+    <h1>{{ "Add" if key == "new" else "Edit" }} Container</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            ConID:<br>
+            <input name="ConID" type="text" value="{{ values[0] }}">
+        </p>
+        <p>
+            ShipmentID:<br>
+            <input name="ShipmentID" type="text" value="{{ values[1] }}">
+        </p>
+        <p>
+            CriticalContainer:<br>
+            <input name="CriticalContainer" type="checkbox" {{values[2] }}">
+        </p>
+        <p>
+            Status:<br>
+            <input name="Status" type="text" value="{{ values[3] }}">
+        </p>
+        <p>
+            UpdatedBy:<br>
+            <input name="UpdatedBy" type="text" value="{{ values[4] }}">
+        </p>
+
+        {% if key == "new" %}
+        <p>
+            <input name="action" type="submit" value="Insert" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+        </p>
+        {% else %}
+        <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+            <input name="action" type="submit" value="Delete" style="color: red">
+        </p>
+        {% endif %}
+    </form>
+</body>
+</html>
