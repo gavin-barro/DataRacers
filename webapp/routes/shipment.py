@@ -5,9 +5,9 @@ import queries.person as db
 from flask import render_template, request, flash, redirect
 
 
-@app.route("/person")
+@app.route("/shipment")
 def person_all():
-    data = db.person_all()
+    data = db.shipment_all()
     return render_template("shipment_all.jinja", data=data)
 
 
@@ -27,10 +27,10 @@ def person_edit(key):
     action = values.pop()
     try:
         if action == "Insert":
-            db.person_ins(values)
+            db.shipment_ins(values)
             flash("Person inserted")
         elif action == "Update":
-            db.person_upd(key, values)
+            db.shipment_upd(key, values)
             flash("Person updated")
         elif action == "Delete":
             db.person_del(key)
