@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>workshop_department</title>
+    <script type="text/javascript" src="static/dropdowns.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Select a Team and see the teams kits and contents</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            <<label for="team_id">Select Year: </label>
+            <select id="team_id" name="team_id">
+                <option value="1" {% if team_id == '1' %}selected{% endif %}>Oracle Red Bull Racing</option>
+                <option value="2" {% if team_id == '2' %}selected{% endif %}>Mercedes-AMG Petronas</option>
+                <option value="3" {% if team_id == '3' %}selected{% endif %}>Scuderia Ferrari</option>
+                <option value="4" {% if team_id == '4' %}selected{% endif %}>McLaren </option>
+            </select>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+    <script>
+        init_select("coll_code", colleges, "{{ coll_code }}");
+    </script>
+
+    {% if data %}
+    <div id="table_div"></div>
+    <div id="chart_div"></div>
+
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'ID');
+            data.addColumn('string', 'State');
+            data.addColumn('string', 'Title');
+            data.addColumn('string', 'Leader');
+            data.addColumn('string', 'First Name');
+            data.addColumn('string', 'Last Name');
+            data.addColumn('string', 'Department');
+            data.addColumn('string', 'College');
+
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                showRowNumber: true,
+                page: true,
+                pageSize: 10,
+            };
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, options);
+        }
+    </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Department');
+            data.addColumn('number', '# of Workshops');
+
+            data.addRows([
+                {% for dept, count in stats.items() %}
+                ['{{ dept }}', {{ count }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                hAxis: {
+                    title: 'Department',
+                },
+                vAxis: {
+                    title: '# of Workshops',
+                    format: '0',
+                },
+                legend: {
+                    position: "none",
+                },
+                width: 600,
+                height: 400,
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    {% endif %}
+
+</body>
+</html>

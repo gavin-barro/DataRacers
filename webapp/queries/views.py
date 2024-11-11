@@ -25,3 +25,14 @@ def race_team_shipment():
         with con.cursor() as cur:
             cur.execute("SELECT * FROM RaceTeamShipmentView")
             return cur.fetchall()
+
+def get_team_kits():
+  with db_connect() as con:
+    with con.cursor() as cur:
+        cur.execute("""SELECT "TeamName", k."KitID", kc."PartDesc", kc."PartWeight" 
+                    FROM "Team" t
+					JOIN "Kit" k ON t."TeamID" = k."TeamID"
+					JOIN "KitContents" kc ON k."KitID" = kc."KitID"
+					WHERE t."TeamID" = 2""")
+        return cur.fetchall()
+	
