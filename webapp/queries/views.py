@@ -30,7 +30,7 @@ def race_team_shipment_status(status: str) -> list:
 def get_team_kits(race_id):
   with db_connect() as con:
     with con.cursor() as cur:
-        cur.execute("""SELECT "TeamName", k."KitID", kc."PartDesc", kc."PartWeight" 
+        cur.execute("""SELECT "TeamName", k."KitID", k."KitSize", kc."PartDesc", kc."PartWeight" 
                     FROM "Team" t
 					JOIN "Kit" k ON t."TeamID" = k."TeamID"
 					JOIN "KitContents" kc ON k."KitID" = kc."KitID"

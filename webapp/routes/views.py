@@ -37,11 +37,12 @@ def race_team_shipment_status():
 @app.route('/select_team_kits')
 def get_team_kits():
     team_id = request.args.get("team_id")
+    stats = {}
     if team_id:
         data = db.get_team_kits(team_id)
-        stats = Counter([row[0] for row in data])
+        stats = Counter([row[2] for row in data])
     else:
         data = None
         stats = None
         
-    return render_template("views/team_kits.jinja",data=data, status=stats, team_id = team_id)
+    return render_template("views/team_kits.jinja",data=data, stats=stats, team_id = team_id)
