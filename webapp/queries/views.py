@@ -23,5 +23,5 @@ def critical_dates(race_year):
 def race_team_shipment():
     with db_connect() as con:
         with con.cursor() as cur:
-            cur.execute("SELECT * FROM RaceTeamShipmentView")
+            cur.execute('SELECT * FROM "RaceTeamShipmentView"')
             return cur.fetchall()
