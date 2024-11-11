@@ -1,9 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>race_team_shipment</title>
+    <meta charset="UTF-8">
+    <title>Race Team Shipment</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <h1>Show the race ID, team name, shipment ID, and shipment status for shipments that are currently "In Transit."</h1>
+    <h1>Race Team Shipment Details</h1>
+
+    <!-- Flash messages -->
+    {% for message in get_flashed_messages() %}
+        <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <!-- Dropdown form for selecting team -->
+    <form action="{{ url_for('race_team_shipment') }}" method="get">
+        <p>
+            <label for="team_name">Select Team:</label>
+            <select id="team_name" name="team_name">
+                <option value="">-- Select Team --</option>
+                {% for team in teams %}
+                    <option value="{{ team }}" {% if team == team_name %}selected{% endif %}>{{ team }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Search">
+        </p>
+    </form>
+
+    {% if data %}
+        <!-- Table and Chart Divs -->
+        <div id="table_div"></div>
+        <div id="chart_div"></div>
+
+        <!-- Google Charts JavaScript for Table -->
+        <script type="text/javascript">
+            google.charts.load('current', { 'packages': ['table'] });
+            google.charts.setOnLoadCallback(drawTable);
+
+            function drawTable() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Race ID');
+                data.addColumn('string', 'Team Name');
+                data.addColumn('string', 'Shipment ID');
+                data.addColumn('string', 'Shipment Status');
+
+                data.addRows([
+                    {% for row in data %}
+                    ['{{ row.RaceID }}', '{{ row.TeamName }}', '{{ row.ShipmentID }}', '{{ row.ShipmentStatus }}'],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    showRowNumber: true,
+                    page: true,
+                    pageSize: 10,
+                };
+
+                var table = new google.visualization.Table(document.getElementById('table_div'));
+                table.draw(data, options);
+            }
+        </script>
+
+        <!-- Google Charts JavaScript for Bar Chart -->
+        <script type="text/javascript">
+            google.charts.load('current', { packages: ['corechart', 'bar'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Shipment Status');
+                data.addColumn('number', 'Count');
+
+                // Aggregating shipment statuses for chart data
+                const shipmentStatusCounts = {};
+                {% for row in data %}
+                    shipmentStatusCounts['{{ row.ShipmentStatus }}'] = (shipmentStatusCounts['{{ row.ShipmentStatus }}'] || 0) + 1;
+                {% endfor %}
+
+                // Adding rows to chart data
+                for (const [status, count] of Object.entries(shipmentStatusCounts)) {
+                    data.addRow([status, count]);
+                }
+
+                var options = {
+                    hAxis: { title: 'Shipment Status' },
+                    vAxis: { title: 'Count', format: '0' },
+                    legend: { position: "none" },
+                    width: 600,
+                    height: 400,
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+    {% else %}
+        <p>No results found for the specified team.</p>
+    {% endif %}
+
 </body>
 </html>

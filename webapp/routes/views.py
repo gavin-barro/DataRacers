@@ -20,6 +20,6 @@ def critical_dates():
 
 @app.route("/race_team_shipment")
 def race_team_shipment():
-    # TODO implement function stub
-    data = db.race_team_shipment()
-    return render_template("views/race_team_shipment.jinja", data=data)
+    team_name = request.args.get("team_name", default=None)
+    data = db.race_team_shipment(team_name)
+    return render_template("views/race_team_shipment.jinja", data=data, team_name=team_name)

@@ -20,8 +20,8 @@ def critical_dates(race_year):
 	    AND c."CriticalContainer" = TRUE;""", (f"{race_year}-01-01", f"{race_year}-12-31"))
             return cur.fetchall()
         
-def race_team_shipment():
+def race_team_shipment(team_name: str) -> list:
     with db_connect() as con:
         with con.cursor() as cur:
-            cur.execute('SELECT * FROM "RaceTeamShipmentView"')
+            cur.execute('SELECT * FROM "RaceTeamShipmentView" WHERE "TeamName" = %s', (team_name,))
             return cur.fetchall()
