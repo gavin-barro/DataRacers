@@ -34,6 +34,6 @@ def get_team_kits(race_id):
                     FROM "Team" t
 					JOIN "Kit" k ON t."TeamID" = k."TeamID"
 					JOIN "KitContents" kc ON k."KitID" = kc."KitID"
-					WHERE t."TeamID" = %s""", race_id)
+					WHERE t."TeamID" = %s""", (race_id,))
         return cur.fetchall()
 	

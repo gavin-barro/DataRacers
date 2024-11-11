@@ -74,8 +74,8 @@
         function drawChart() {
 
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Department');
-            data.addColumn('number', '# of Workshops');
+            data.addColumn('string', 'Team');
+            data.addColumn('number', '# of kits');
 
             data.addRows([
                 {% for dept, count in stats.items() %}
@@ -85,10 +85,10 @@
 
             var options = {
                 hAxis: {
-                    title: 'Department',
+                    title: 'Number of kits per team',
                 },
                 vAxis: {
-                    title: '# of Workshops',
+                    title: '# of kits',
                     format: '0',
                 },
                 legend: {
