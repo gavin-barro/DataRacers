@@ -19,3 +19,9 @@ def critical_dates(race_year):
 	    AND s."Status" = 'Not Left'                      
 	    AND c."CriticalContainer" = TRUE;""", (f"{race_year}-01-01", f"{race_year}-12-31"))
             return cur.fetchall()
+        
+def race_team_shipment():
+    with db_connect() as con:
+        with con.cursor() as cur:
+            cur.execute("SELECT * FROM RaceTeamShipmentView")
+            return cur.fetchall()
