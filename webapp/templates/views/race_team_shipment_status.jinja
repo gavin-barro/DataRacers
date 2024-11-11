@@ -35,14 +35,14 @@
         function drawTable() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn('string', 'ID');
+            data.addColumn('string', 'Race ID');
             data.addColumn('string', 'Team Name');
+            data.addColumn('number', 'Shipment ID');
             data.addColumn('string', 'Shipment Status');
-            data.addColumn('string', 'Shipment Date');
 
             data.addRows([
                 {% for row in data %}
-                ['{{ row[0] }}', '{{ row[1] }}', '{{ row[2] }}', '{{ row[3] }}'],
+                ['{{ row[0] }}', '{{ row[1] }}', {{ row[2] }}, '{{ row[3] }}'],
                 {% endfor %}
             ]);
 
@@ -63,7 +63,7 @@
 
         function drawChart() {
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Status');
+            data.addColumn('string', 'Shipment Status');
             data.addColumn('number', 'Count');
 
             data.addRows([
