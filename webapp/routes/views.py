@@ -27,4 +27,4 @@ def race_team_shipment():
 @app.route('/select_team_kits')
 def get_team_kits():
     data = db.get_team_kits()
-    return render_template("views/team_kits.jinja", data=data)
+    return render_template("views/team_kits.jinja")
