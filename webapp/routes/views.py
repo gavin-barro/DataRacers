@@ -18,8 +18,8 @@ def critical_dates():
     return render_template("views/critical_dates.jinja",
                            race_year=race_year, data=data, stats=stats)
 
-@app.route("/event_schedule")
-def event_schedule():
+@app.route("/race_team_shipment")
+def race_team_shipment():
     # TODO implement function stub
     data = db.race_team_shipment()
     return render_template("views/race_team_shipment.jinja", data=data)
