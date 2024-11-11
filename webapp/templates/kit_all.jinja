@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Workshops</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1>Workshops</h1>
+     <p><a href="/">Home</a></p>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    {% if data %}
+    <div id="table_div"></div>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'KitID');
+            data.addColumn('string', 'OwnerID');
+            data.addColumn('string', 'TypeOfKit');
+            data.addColumn('string', 'TeamID');
+            data.addColumn('string', 'TotalWeight');
+            data.addColumn('string', 'KitSize');
+            
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
+
+            google.visualization.events.addListener(table, "select", function() {
+                let selection = table.getSelection();
+                let item = selection[0];
+                if (item) {
+                    let id = data.getValue(item.row, 0);
+                    window.location.href = 'kit/' + id;
+                }
+            });
+        }
+    </script>
+    {% endif %}
+    <p>
+        <button onclick="window.location.href = 'kit/new'">Add Shipment</button>
+    </p>
+</body>
+</html>
