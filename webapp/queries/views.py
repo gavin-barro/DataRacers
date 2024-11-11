@@ -15,8 +15,7 @@ def critical_dates(race_year):
 	FROM "Race_Event" re
 	JOIN "Shipment" s ON re."RaceID" = s."RaceID"
 	JOIN "Container" c ON s."ShipmentID" = c."ShipmentID"
-	WHERE re."Date" BETWEEN '%s-01-01' 
-		AND '%s-12-31'  
+	WHERE re."Date" BETWEEN %s AND %s
 	    AND s."Status" = 'Not Left'                      
-	    AND c."CriticalContainer" = TRUE;""", [race_year])
+	    AND c."CriticalContainer" = TRUE;""", (f"{race_year}-01-01", f"{race_year}-12-31"))
             return cur.fetchall()

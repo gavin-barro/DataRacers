@@ -11,7 +11,7 @@ def critical_dates():
     race_year = request.args.get("race_year")
     if race_year:
         data = db.critical_dates(race_year)
-        stats = Counter([row[6] for row in data])
+        stats = Counter([row[1] for row in data])
     else:
         data = None
         stats = None
