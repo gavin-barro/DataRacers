@@ -21,15 +21,9 @@ def critical_dates(race_year):
             return cur.fetchall()
         
 def race_team_shipment(team_name: str) -> list:
-    query = """
-        SELECT re."RaceID", t."TeamName", s."ShipmentID", s."Status"
-        FROM "Race_Event" re
-        JOIN "Team" t ON re."RaceID" = t."RaceID"
-        JOIN "Shipment" s ON re."RaceID" = s."RaceID"
-        WHERE t."TeamName" = %s;
-    """
     with db_connect() as con:
         with con.cursor() as cur:
+<<<<<<< Updated upstream
             # cur.execute('SELECT * FROM "RaceTeamShipmentView" WHERE "TeamName" = %s', (team_name,))
             # return cur.fetchall()
             cur.execute(query, (team_name,))
@@ -45,3 +39,11 @@ def get_team_kits():
 					WHERE t."TeamID" = 2""")
         return cur.fetchall()
 	
+=======
+            cur.execute(
+                """
+                    SELECT * FROM "RaceTeamShipmentView"
+                    WHERE "TeamName" = %s;
+                """, (team_name))
+            return cur.fetchall()
+>>>>>>> Stashed changes

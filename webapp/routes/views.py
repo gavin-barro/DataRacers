@@ -24,7 +24,21 @@ def race_team_shipment():
     data = db.race_team_shipment()
     return render_template("views/race_team_shipment.jinja", data=data)
 
+<<<<<<< Updated upstream
 @app.route('/select_team_kits')
 def get_team_kits():
     data = db.get_team_kits()
     return render_template("views/team_kits.jinja", data=data)
+=======
+    team_name = request.args.get("team_name")
+    print(f"Query string: {request.args}") 
+    print(f"Selected Team: {team_name}")
+    
+    if team_name:
+        data = db.race_team_shipment(team_name)
+        stats = Counter([row[4] for row in data])
+    else:
+        data = None
+        stats = None
+    return render_template("views/race_team_shipment.jinja", data=data, team_name=team_name, stats=stats)
+>>>>>>> Stashed changes
