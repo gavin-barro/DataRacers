@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Race Team Shipment</title>
+    <title>Race Team Shipment Status</title>
     <script type="text/javascript" src="static/dropdowns.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <h1>Race Team Shipment Details</h1>
+    <h1>Race Team Shipments by Status</h1>
 
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
@@ -14,12 +14,18 @@
 
     <form>
         <p>
-            <select id="team_name" name="team_name"></select>
-            <input type="submit">
+            <label for="status">Select Status:</label>
+            <select id="status" name="status">
+                <option value="shipped" {% if status == "shipped" %}selected{% endif %}>Shipped</option>
+                <option value="pending" {% if status == "pending" %}selected{% endif %}>Pending</option>
+                <option value="delivered" {% if status == "delivered" %}selected{% endif %}>Delivered</option>
+            </select>
+            <input type="submit" value="Filter">
         </p>
     </form>
+
     <script>
-        init_select("team_name", teams, "{{ team_name }}");
+        init_select("status", status_options, "{{ status }}");
     </script>
 
     {% if data %}
@@ -33,14 +39,14 @@
         function drawTable() {
             var data = new google.visualization.DataTable();
 
-            data.addColumn('string', 'Race ID');
+            data.addColumn('string', 'ID');
             data.addColumn('string', 'Team Name');
-            data.addColumn('string', 'Shipment ID');
-            data.addColumn('string', 'Shipment Status');
+            data.addColumn('string', 'Status');
+            data.addColumn('string', 'Shipment Date');
 
             data.addRows([
                 {% for row in data %}
-                ['{{ row.RaceID }}', '{{ row.TeamName }}', '{{ row.ShipmentID }}', '{{ row.ShipmentStatus }}'],
+                ['{{ row[0] }}', '{{ row[1] }}', '{{ row[2] }}', '{{ row[3] }}'],
                 {% endfor %}
             ]);
 
@@ -60,23 +66,22 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Shipment Status');
-            data.addColumn('number', 'Count');
+            data.addColumn('string', 'Status');
+            data.addColumn('number', '# of Shipments');
 
             data.addRows([
-                {% for status, count in shipment_status_counts.items() %}
+                {% for status, count in stats.items() %}
                 ['{{ status }}', {{ count }}],
                 {% endfor %}
             ]);
 
             var options = {
                 hAxis: {
-                    title: 'Shipment Status',
+                    title: 'Status',
                 },
                 vAxis: {
-                    title: 'Count',
+                    title: '# of Shipments',
                     format: '0',
                 },
                 legend: {

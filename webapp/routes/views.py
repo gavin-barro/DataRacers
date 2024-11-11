@@ -18,11 +18,21 @@ def critical_dates():
     return render_template("views/critical_dates.jinja",
                            race_year=race_year, data=data, stats=stats)
 
-@app.route("/race_team_shipment")
-def race_team_shipment():
-    # TODO implement function stub
-    data = db.race_team_shipment()
-    return render_template("views/race_team_shipment.jinja", data=data)
+@app.route("/race_team_shipment_status")
+def race_team_shipment_status():
+    status = request.args.get("status") 
+    print(f"Query string: {request.args}")
+    print(f"Selected Status: {status}")
+    
+    if status:
+        data = db.race_team_shipment_status(status) 
+        stats = Counter([row[4] for row in data]) 
+    else:
+        data = None
+        stats = None
+    
+    return render_template("views/race_team_shipment_status.jinja", data=data, status=status, stats=stats)
+
 
 @app.route('/select_team_kits')
 def get_team_kits():
