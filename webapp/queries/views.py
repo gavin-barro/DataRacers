@@ -23,7 +23,7 @@ def critical_dates(race_year):
 def race_team_shipment_status(status: str) -> list:
     with db_connect() as con:
         with con.cursor() as cur:
-            cur.execute('SELECT * FROM "RaceTeamShipmentView" WHERE "ShipmentStatus" = %s', (status))
+            cur.execute('SELECT * FROM "RaceTeamShipmentView" WHERE "ShipmentStatus" = %s', (status,))
             return cur.fetchall()
 
 

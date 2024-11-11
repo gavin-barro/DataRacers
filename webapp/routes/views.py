@@ -26,7 +26,7 @@ def race_team_shipment_status():
     
     if status:
         data = db.race_team_shipment_status(status) 
-        stats = Counter([row[4] for row in data]) 
+        stats = Counter([row[3] for row in data]) 
     else:
         data = None
         stats = None
