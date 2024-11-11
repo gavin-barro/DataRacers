@@ -14,11 +14,11 @@
 
     <form method="get">
         <p>
-            <label for="status">Select Shipment Status:</label>
+            <label for="status">Select Container Status:</label>
             <select id="status" name="status">
-                <option value="In Transit" {% if status == 'In Transit' %}selected{% endif %}>In Transit</option>
-                <option value="Arrived" {% if status == 'Arrived' %}selected{% endif %}>Arrived</option>
-                <option value="Not Left" {% if status == 'Not Left' %}selected{% endif %}>Not Left</option>
+                <option value="airplane" {% if status == 'airplane' %}selected{% endif %}>Airplane</option>
+                <option value="boat" {% if status == 'boat' %}selected{% endif %}>Boat</option>
+                <option value="submarine" {% if status == 'submarine' %}selected{% endif %}>Submarine</option>
             </select>
             <input type="submit" value="Filter">
         </p>
@@ -38,7 +38,7 @@
             data.addColumn('string', 'Race ID');
             data.addColumn('string', 'Team Name');
             data.addColumn('number', 'Shipment ID');
-            data.addColumn('string', 'Shipment Status');
+            data.addColumn('string', 'Container');
 
             data.addRows([
                 {% for row in data %}
@@ -63,7 +63,7 @@
 
         function drawChart() {
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Shipment Status');
+            data.addColumn('string', 'Container Status');
             data.addColumn('number', 'Count');
 
             data.addRows([
@@ -74,7 +74,7 @@
 
             var options = {
                 hAxis: {
-                    title: 'Shipment Status',
+                    title: 'Container Status',
                 },
                 vAxis: {
                     title: 'Count',
