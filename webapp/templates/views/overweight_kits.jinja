@@ -62,11 +62,11 @@
 
       function drawChart() {
         console.log('drawChart function called');
-        var data = google.visualization.DataTable();
+        var data = new google.visualization.DataTable();
        // data.addColumn('string', 'ID');  // ID column
         data.addColumn('string', 'ID');  // ID column (strings)
         data.addColumn('number', 'Weight');  // Weight column (numbers)
-        data.addRows(['number', 'Weight']);
+        //data.addRows(['number', 'Weight']);
         data.addRows([
             {% for row in data%}
             ['{{ row[0] }}',{{ row[3] }}],
@@ -77,7 +77,7 @@
           legend: { position: 'none' },
         };
 
-        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
       
