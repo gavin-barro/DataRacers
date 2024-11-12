@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kits by weight</title>
+    <script type="text/javascript" src="static/dropdowns.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <p><a href="/">Home</a></p>
+    <h1>List of Containers over a certain weight</h1>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            <form for="weight">
+                <input name="weight" type="number" placeholder="Enter minimum weight to filter by">
+            
+            <input type="submit" value="Submit">
+            </form>
+        </p>
+    </form>
+
+    {% if data %}
+
+    <div id="table_div"></div>
+    <div id="chart_div" style="width: 900px; height: 500px; overflow: auto"></div>
+    <script type="text/javascript">
+        
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'Container ID');
+            data.addColumn('number', 'Container Weight');
+            data.addColumn('string', 'Owner');
+            data.addColumn('string', 'Owner Phoner Number');
+            data.addRows([
+                {% for row in data %}
+                ['{{ row[0] }}',{{ row[3] }}, '{{ row[4] }}', '{{row[5]}}'],
+                {% endfor %}
+            ]);
+            var options = {
+                showRowNumber: true,
+                page: true,
+                pageSize: 10,
+            };
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, options);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        console.log('drawChart function called');
+        var data = google.visualization.DataTable();
+       // data.addColumn('string', 'ID');  // ID column
+        data.addColumn('string', 'ID');  // ID column (strings)
+        data.addColumn('number', 'Weight');  // Weight column (numbers)
+        data.addRows(['number', 'Weight']);
+        data.addRows([
+            {% for row in data%}
+            ['{{ row[0] }}',{{ row[3] }}],
+            {% endfor %}
+        ]);
+        var options = {
+          title: 'Weight of Kits',
+          legend: { position: 'none' },
+        };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      
+
+    </script>
+    {% endif %}
+</body>
+</html>

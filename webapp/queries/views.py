@@ -53,3 +53,9 @@ def get_team_kits(race_id):
 					WHERE t."TeamID" = %s""", (race_id,))
         return cur.fetchall()
 	
+
+def get_overweight_kits(weight):
+    with db_connect() as con:
+        with con.cursor() as cur:
+            cur.execute(f'SELECT * FROM "OverweightKits" WHERE "Weight of Kit" > {weight}')
+            return cur.fetchall()

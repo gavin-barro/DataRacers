@@ -49,4 +49,5 @@ FROM "Container" c
 	JOIN "ContainerContents" cc ON c."ConID" = cc."ConID"
 	JOIN "Kit" k ON k."KitID" = cc."KitID"
 	JOIN "Person" p ON k."OwnerID" = p."PersonID"
-WHERE k."TotalWeight" > 10
+WHERE "TotalWeight" > 10
+

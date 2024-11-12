@@ -46,3 +46,17 @@ def get_team_kits():
         stats = None
         
     return render_template("views/team_kits.jinja",data=data, stats=stats, team_id = team_id)
+
+
+@app.route('/overweight_kits')
+def get_overweight_kits():
+    weight = request.args.get("weight")
+    print(f"weight {weight}")
+    
+    if weight:
+        data = db.get_overweight_kits(12)
+        print(data)
+    else:
+        data = None
+ 
+    return render_template("views/overweight_kits.jinja",data=data)
