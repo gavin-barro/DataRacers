@@ -19,7 +19,7 @@ def critical_dates():
                            race_year=race_year, data=data, stats=stats)
 
 @app.route("/race_team_shipment_status")
-def race_team_shipment_status():
+def race_team_shipment_status() -> str:
     status = request.args.get("status") 
     print(f"Query string: {request.args}")
     print(f"Selected Status: {status}")
