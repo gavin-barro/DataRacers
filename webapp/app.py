@@ -10,6 +10,9 @@ app.secret_key = "dev"  # required for flash()
 def index():
     return render_template("index.jinja")
 
+@app.route("/test")
+def test():
+    return render_template("test.jinja")
 
 # Import all routes from other modules
 import routes
