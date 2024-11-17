@@ -18,6 +18,18 @@ def critical_dates():
     return render_template("views/critical_dates.jinja",
                            race_year=race_year, data=data, stats=stats)
 
+@app.route("/race_crew")
+def race_crew():
+    race_year = request.args.get("race_year")
+    if race_year:
+        data = db.critical_dates(race_year)
+        stats = Counter([row[1] for row in data])
+    else:
+        data = None
+        stats = None
+    return render_template("views/race_crew.jinja",
+                           race_year=race_year, data=data, stats=stats)
+
 @app.route("/race_team_shipment_status")
 def race_team_shipment_status() -> str:
     status = request.args.get("status") 
