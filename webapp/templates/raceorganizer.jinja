@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     body {
@@ -31,18 +33,123 @@
     background-color: #450084;
     color: white;
     }
+    .styled_button {
+    background-color: #450084; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  .styled_button:active {
+    background-color: #CBB677; /* Darker green on active (click) */
+    transform: scale(0.98);     /* Slight shrink on click */
+}
 </style>
 </head>
 <body>
 
 <div class="topnav">
   <a class="home" href="/">Home</a>
-  <a href="/race_organizer">Race Organizer</a>
+  <a href="/raceorganizer" class="active">Race Organizer</a>
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
+  <a href="/test">Test</a>
 </div>
 
+<div style="padding-left:16px">
+    <h2>Race Manager Dashboard</h2>
+    <h3>Select Action</h3>
+    <form>
+    <p style="padding-left:24px">
+        <input name="action" type ="submit" value="View and Add Races" class="styled_button">
+        <input name="action" type="submit" value="View and Add Shipments" class="styled_button">
+    </p>
+    </form>
+</div>
 
+{% if action == "races"%}
+    <h3>Races</h3>
+    <div id="table_div"></div>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'RaceID');
+            data.addColumn('string', 'Location');
+            data.addColumn('string', 'Date');
+            data.addColumn('string', 'CreatorID');
+
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
+
+            google.visualization.events.addListener(table, "select", function() {
+                let selection = table.getSelection();
+                let item = selection[0];
+                if (item) {
+                    let id = data.getValue(item.row, 0);
+                    window.location.href = 'raceevent/' + id;
+                }
+            });
+        }
+    </script>
+        <p>
+        <button onclick="window.location.href = 'raceevent/new'">Add Race Event</button>
+        </p>
+{%elif action == "shipments"%}
+<div id="table_div"></div>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+
+            data.addColumn('string', 'ShipmentID');
+            data.addColumn('string', 'RaceID');
+            data.addColumn('string', 'CurrentLocatioon');
+            data.addColumn('string', 'Destination');
+            data.addColumn('string', 'Method');
+            data.addColumn('string', 'CreatedBy');
+            data.addColumn('string', 'Status');
+
+            data.addRows([
+                {% for row in data %}
+                [{% for value in row %}'{{ value }}', {% endfor %}],
+                {% endfor %}
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
+
+            google.visualization.events.addListener(table, "select", function() {
+                let selection = table.getSelection();
+                let item = selection[0];
+                if (item) {
+                    let id = data.getValue(item.row, 0);
+                    window.location.href = 'shipment/' + id;
+                }
+            });
+        }
+    </script>
+        <p>
+        <button onclick="window.location.href = 'shipment/new'">Add Shipment</button>
+    </p>
+
+
+
+{%endif%}
 
 </body>
 </html>
