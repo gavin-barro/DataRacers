@@ -6,3 +6,4 @@ from . import views
 from . import kit
 from . import race_organizer
 from . import racecrew
+from . import about
