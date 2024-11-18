@@ -38,6 +38,46 @@
     #table_div {
         padding: 14px 16px;
     }
+
+    .google-table-header {
+    background-color: #450084; 
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+}
+
+/* Table Rows */
+.google-table-row {
+    color: #333; 
+    font-size: 14px;
+}
+
+.google-table-odd-row {
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+.google-table-hover-row:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Selected Row */
+.google-table-selected-row {
+    background-color: #D3E4CD; /* Light green */
+    font-weight: bold;
+}
+
+/* Table Cells */
+.google-table-cell {
+    padding: 15px; 
+    text-align: left;
+}
+
+/* Header Cells */
+.google-table-header-cell {
+    padding: 30px;
+}
 </style>
     
 <body>
@@ -104,7 +144,7 @@
             data.addColumn('string', 'Location');
             data.addColumn('string', 'Date');
             data.addColumn('string', 'Shipment Status');
-            data.addColumn('string', 'Critical ContainerID');
+            data.addColumn('string', 'ContainerID');
 
             data.addRows([
                 {% for row in data %}
@@ -113,9 +153,20 @@
             ]);
 
             var options = {
-                showRowNumber: true,
-                page: true,
-                pageSize: 10,
+            showRowNumber: true,
+            page: true,
+            pageSize: 10,
+            width: '100%', // Adjust width
+            height: '400px', // Adjust height
+            cssClassNames: {
+                headerRow: 'google-table-header',
+                tableRow: 'google-table-row',
+                oddTableRow: 'google-table-odd-row',
+                selectedTableRow: 'google-table-selected-row',
+                hoverTableRow: 'google-table-hover-row',
+                headerCell: 'google-table-header-cell',
+                tableCell: 'google-table-cell'
+            }
             };
 
             var table = new google.visualization.Table(document.getElementById('table_div'));
