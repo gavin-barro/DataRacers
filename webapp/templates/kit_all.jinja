@@ -33,16 +33,50 @@
     background-color: #450084;
     color: white;
     }
-    .styled_button {
+
+    #table_div {
+        padding: 14px 16px;
+    }
+
+    .google-table-header {
     background-color: #450084; 
-    border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-  }
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+}
+
+/* Table Rows */
+.google-table-row {
+    color: #333; 
+    font-size: 14px;
+}
+
+.google-table-odd-row {
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+.google-table-hover-row:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Selected Row */
+.google-table-selected-row {
+    background-color: #D3E4CD; /* Light green */
+    font-weight: bold;
+}
+
+/* Table Cells */
+.google-table-cell {
+    padding: 15px; 
+    text-align: left;
+}
+
+/* Header Cells */
+.google-table-header-cell {
+    padding: 30px;
+}
 </style>
 </head>
 <body>
@@ -57,11 +91,14 @@
   <a href="#about">About</a>
   <a href="/test">Test</a>
 </div>
-    <h1>Kits</h1>
-
+    
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
     {% endfor %}
+
+    <div style="padding-left:16px"></div>
+        <h1>All Kits</h1>
+    </div>
 
     {% if data %}
     <div id="table_div"></div>
@@ -84,23 +121,30 @@
                 [{% for value in row %}'{{ value }}', {% endfor %}],
                 {% endfor %}
             ]);
+            
+            
+            var options = {
+            showRowNumber: true,
+            page: true,
+            pageSize: 10,
+            width: '100%', 
+            height: '400px',
+            cssClassNames: {
+                headerRow: 'google-table-header',
+                tableRow: 'google-table-row',
+                oddTableRow: 'google-table-odd-row',
+                selectedTableRow: 'google-table-selected-row',
+                hoverTableRow: 'google-table-hover-row',
+                headerCell: 'google-table-header-cell',
+                tableCell: 'google-table-cell'
+            }
+            };
+
 
             var table = new google.visualization.Table(document.getElementById('table_div'));
-            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
-
-            google.visualization.events.addListener(table, "select", function() {
-                let selection = table.getSelection();
-                let item = selection[0];
-                if (item) {
-                    let id = data.getValue(item.row, 0);
-                    window.location.href = 'kit/' + id;
-                }
-            });
+            table.draw(data, options);
         }
     </script>
     {% endif %}
-    <p>
-        <button onclick="window.location.href = 'kit/new'">Add Shipment</button>
-    </p>
 </body>
 </html>
