@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>workshop_department</title>
-    <script type="text/javascript" src="static/dropdowns.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+    overflow: hidden;
+    background-color: #CBB677;
+    }
+
+    .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    }
+
+    .topnav a.active {
+    background-color: #450084;
+    color: white;
+    }
+    .styled_button {
+    background-color: #450084; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+</style>
 </head>
 <body>
+
+<div class="topnav">
+  <a class="home" href="/">Home</a>
+  <a href="/raceorganizer">Race Organizer</a>
+  <a href="race_crew">Race Crew</a>
+  <a href="/kit">Kits</a>
+  <a href="/select_team_kits"  class="active"> View Container Contents</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="/test">Test</a>
+</div>
     <h1>Select a Team and see the teams kits and contents</h1>
-    <p><a href="/">Home</a></p>
 
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
@@ -15,7 +65,7 @@
 
     <form>
         <p>
-            <<label for="team_id">Select Year: </label>
+            <label for="team_id">Select Year: </label>
             <select id="team_id" name="team_id">
                 <option value="1" {% if team_id == '1' %}selected{% endif %}>Oracle Red Bull Racing</option>
                 <option value="2" {% if team_id == '2' %}selected{% endif %}>Mercedes-AMG Petronas</option>
