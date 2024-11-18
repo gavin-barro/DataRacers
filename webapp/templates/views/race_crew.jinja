@@ -2,8 +2,8 @@
 <html>
 <head>
 <title>race_crew</title>
-    <script type="text/javascript" src="static/dropdowns.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="static/dropdowns.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <style>
     body {
@@ -34,11 +34,14 @@
     background-color: #450084;
     color: white;
     }
+
+    #table_div {
+        padding: 14px 16px;
+    }
 </style>
     
-
 <body>
-    </head>
+</head>
 <div class="topnav">
   <a href="/">Home</a>
   <a href="/raceorganizer">Race Organizer</a>
@@ -46,26 +49,43 @@
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
 </div>
-    <h1>Upcoming critical shipments (that are not shipped yet) for race events in a chosen year</h1>
 
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
     {% endfor %}
 
-    <form>
-        <p>
-            <label for="race_year">Select Year:</label>
-            <select id="race_year" name="race_year">
-                <option value="2023" {% if race_year == '2023' %}selected{% endif %}>2023</option>
-                <option value="2024" {% if race_year == '2024' %}selected{% endif %}>2024</option>
-            </select>
+    <div style="padding-left:16px">
+        <h2>Race Crew Dashboard</h2>
+        <h3>Select Year and Location of Race Event</h3>
+    </div>
+    
+    <form method="POST">
+    <p style="padding-left:24px">
+        <label for="race_year">Select Year:</label>
+        <select id="race_year" name="race_year" onchange="this.form.submit()">
+            <option value="" {% if not race_year %}selected{% endif %}>-- Select Year --</option>
+            <option value="2023" {% if race_year == '2023' %}selected{% endif %}>2023</option>
+            <option value="2024" {% if race_year == '2024' %}selected{% endif %}>2024</option>
+        </select>
+    </p>
+    </form>
+
+    {% if race_year %}
+    <form method="POST">
+        <p style="padding-left:24px">
             <label for="location">Select Location:</label>
             <select id="location" name="location">
-                <option value="Bahrain Grand Prix" {% if location == 'Bahrain Grand Prix' %}selected{% endif %}>Bahrain Grand Prix</option>
+                <option value="" {% if not location %}selected{% endif %}>-- Select Location --</option>
+                {% for loc in locations %}
+                    <option value="{{ loc }}" {% if loc == location %}selected{% endif %}>{{ loc }}</option>
+                {% endfor %}
             </select>
+            <input type="hidden" name="race_year" value="{{ race_year }}">
             <input type="submit" value="Submit">
         </p>
     </form>
+    {% endif %}
+
     <script>
         init_select("race_year", colleges, "{{ race_year }}");
         init_select("location", colleges, "{{ location }}");
@@ -73,7 +93,6 @@
 
     {% if data %}
     <div id="table_div"></div>
-    <div id="chart_div"></div>
 
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['table'] });
@@ -101,42 +120,6 @@
 
             var table = new google.visualization.Table(document.getElementById('table_div'));
             table.draw(data, options);
-        }
-    </script>
-
-    <script type="text/javascript">
-        google.charts.load('current', { packages: ['corechart', 'bar'] });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'R');
-            data.addColumn('number', '# of critical containers');
-
-            data.addRows([
-                {% for dept, count in stats.items() %}
-                ['{{ dept }}', {{ count }}],
-                {% endfor %}
-            ]);
-
-            var options = {
-                hAxis: {
-                    title: 'Race Event',
-                },
-                vAxis: {
-                    title: '# of Upcoming Critical Containers',
-                    format: '0',
-                },
-                legend: {
-                    position: "none",
-                },
-                width: 700,
-                height: 400,
-            };
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
         }
     </script>
     {% endif %}
