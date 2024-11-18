@@ -59,3 +59,19 @@ def get_overweight_kits(weight):
         with con.cursor() as cur:
             cur.execute(f'SELECT * FROM "OverweightKits" WHERE "Weight of Kit" > {weight}')
             return cur.fetchall()
+        
+def racecrew_kitview(race_year, location):
+    with db_connect() as con:
+        with con.cursor() as cur:
+            cur.execute("""SELECT
+re."Location",
+re."Date",
+s."Status" AS "Shipment Status",
+c."ConID" AS "ContainerID"
+FROM "Race_Event" re
+	JOIN "Shipment" s ON re."RaceID" = s."RaceID"
+	JOIN "Container" c ON s."ShipmentID" = c."ShipmentID"
+WHERE re."Date" BETWEEN %s
+		AND %s 
+		AND "Location" = %s""", (f"{race_year}-01-01", f"{race_year}-12-31", f'{location}'))
+            return cur.fetchall()
