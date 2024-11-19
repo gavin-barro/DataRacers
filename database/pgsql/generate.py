@@ -85,7 +85,7 @@ def main():
             starting_kit_id += 1
     con.commit()
     # someone run this when containers is put into database
-    '''
+    
     starting_kit_id = 5000
     sizes = ("small", "medium", "large")
     for i in range(0, NUM_KITS):
@@ -122,7 +122,7 @@ def main():
         )
         cur.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s)', temp)
     con.commit()
-
+    '''
 
 if __name__ == "__main__":
     main()
