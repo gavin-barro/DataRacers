@@ -49,35 +49,18 @@ def main():
 		temp.append(get_status())
 
 		# appends temp list to final_info list
-		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
+		#cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
 	
-	container_id = 6000
-	curr_shipid = 5000
-	for i in range(num_shipments):
-		for j in range(num_containers):
-			temp = []
-			temp.append(container_id)
-			temp.append(curr_shipid)
-			temp.append(get_rand_boolean())
-			temp.append(get_random_transport())
-			temp.append(int(random.random()))
-			container_id += 1
-			cur.execute('INSERT INTO "Container" VALUES (%s, %s, %s, %s, %s)', temp)
-
-		
-		curr_shipid += 1
-
 	con.commit()
+	
 		
-def get_rand_boolean():
-	return random.choice([True, False])
-
 def get_status():
 	return random.choice(["Arrived", "In Transit", "Not Left"])
 
 def get_random_transport():
-	trans = ["airplane", "truck", "boat", "submarine"]
+	trans = ["Airplane", "Truck", "Boat", "Submarine"]
 	return random.choice(trans)
+
 
 
 if __name__ == "__main__":
