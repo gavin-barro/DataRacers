@@ -8,6 +8,11 @@ from flask import render_template, request, flash, redirect
 @app.route("/shipment")
 def show_shipment_all():
     data = db.shipment_all()
+    # Capitalizing the data
+    data = [
+        tuple(value.title() if isinstance(value, str) else value for value in row)
+        for row in data
+    ]
     return render_template("shipment_all.jinja", data=data)
 
 

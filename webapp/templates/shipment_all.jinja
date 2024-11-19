@@ -31,7 +31,7 @@
 
             data.addRows([
                 {% for row in data %}
-                [{% for value in row %}'{{ value }}', {% endfor %}],
+                [{% for value in row %}'{{ value | title }}', {% endfor %}],
                 {% endfor %}
             ]);
 
