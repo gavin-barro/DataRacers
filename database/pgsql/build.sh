@@ -20,7 +20,7 @@ $CMD < load.sql
 echo Generating data...
 python create_shipment.py
 python create_container.py
-#python generate.py
+python generate.py
 #python kitstuff.py
 
 echo Adding constraints...
