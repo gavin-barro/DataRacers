@@ -71,7 +71,7 @@ CREATE TABLE "RaceCrew_Member" (
 
 CREATE TABLE "KitContents" (
   "KitID" int UNIQUE PRIMARY KEY NOT NULL,
-  "PartID" int NOT NULL,
+  "PartName" text NOT NULL,
   "PartDesc" text NOT NULL,
   "PartWeight" int NOT NULL
 );

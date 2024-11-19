@@ -101,12 +101,12 @@ def main():
             total_weight, stuff = getLarge(car_parts, kit_id)
         
         this_kit = (kit_id, random.randint(0, 100), True, team_id, total_weight, cur_size)
-        #con.execute('INSERT INTO "Kit" VALUES (%s, %s, %s, %s, %s, %s)', this_kit)
-        #con.commit()
-        for s in stuff:
-            print(s)
+        con.execute('INSERT INTO "Kit" VALUES (%s, %s, %s, %s, %s, %s)', this_kit)
+        con.commit()
+        #for s in stuff:
+            #print(s)
             #con.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s)', s)
-            con.commit()
+            #con.commit()
             
         
         kit_id += 1
