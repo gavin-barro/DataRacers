@@ -49,7 +49,7 @@ def main():
 		temp.append(get_status())
 
 		# appends temp list to final_info list
-		#cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
+		cur.execute('INSERT INTO "Shipment" VALUES (%s , %s , %s, %s, %s, %s, %s)', temp)
 	
 	con.commit()
 	

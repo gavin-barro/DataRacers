@@ -85,6 +85,7 @@ def main():
     kit_id = 7000
     team_id = 1
     curr_container_id = 6000
+    part_id = 10000
 
     while curr_container_id <= MAX_CON:
         # car_parts[random.randint(0, len(car_parts) - 1)]
@@ -94,19 +95,18 @@ def main():
         total_weight = 0
         stuff = []
         if cur_size == "small":
-            total_weight, stuff = getSmall(car_parts, kit_id)
+            total_weight, stuff, part_id = getSmall(car_parts, kit_id, part_id)
         elif cur_size == "medium":
-            total_weight, stuff = getMedium(car_parts, kit_id)
+            total_weight, stuff, part_id = getMedium(car_parts, kit_id, part_id)
         else:
-            total_weight, stuff = getLarge(car_parts, kit_id)
+            total_weight, stuff, part_id = getLarge(car_parts, kit_id, part_id)
         
         this_kit = (kit_id, random.randint(0, 100), True, team_id, total_weight, cur_size)
         con.execute('INSERT INTO "Kit" VALUES (%s, %s, %s, %s, %s, %s)', this_kit)
         con.commit()
-        #for s in stuff:
-            #print(s)
-            #con.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s)', s)
-            #con.commit()
+        for s in stuff:
+            con.execute('INSERT INTO "KitContents" VALUES (%s, %s, %s, %s, %s)', s)
+            con.commit()
             
         
         kit_id += 1
@@ -116,7 +116,7 @@ def main():
 
         
     
-def getSmall(car_parts, kit_id):
+def getSmall(car_parts, kit_id, part_id):
     part_one = car_parts[random.randint(0, len(car_parts) - 1)]
     part_two = car_parts[random.randint(0, len(car_parts) - 1)]
     part_three = car_parts[random.randint(0, len(car_parts) - 1)]
@@ -129,18 +129,20 @@ def getSmall(car_parts, kit_id):
     weight_three = random.randint(10, 25)
 
     total_weight = weight_one + weight_two + weight_three
-    c1 = (kit_id, part_one[0], part_one[1], weight_one)
-    c2 = (kit_id, part_two[0], part_two[1], weight_two)
-    c3 = (kit_id, part_three[0], part_three[1], weight_three)
+    c1 = (kit_id, part_id, part_one[0], part_one[1], weight_one)
+    part_id += 1
+    c2 = (kit_id, part_id, part_two[0], part_two[1], weight_two)
+    part_id += 1
+    c3 = (kit_id, part_id, part_three[0], part_three[1], weight_three)
+    part_id += 1
     
     stuff = []
     stuff.append(c1)
     stuff.append(c2)
     stuff.append(c3)
-    return total_weight, stuff
+    return total_weight, stuff, part_id
     
-
-def getMedium(car_parts, kit_id):
+def getMedium(car_parts, kit_id, part_id):
     part_one = car_parts[random.randint(0, len(car_parts) - 1)]
     part_two = car_parts[random.randint(0, len(car_parts) - 1)]
     while part_one == part_two:
@@ -150,21 +152,24 @@ def getMedium(car_parts, kit_id):
     weight_two = random.randint(35, 50)
     
     total_weight = weight_one + weight_two
-    c1 = (kit_id, part_one[0], part_two[1], weight_one)
-    c2 = (kit_id, part_two[0], part_two[1], weight_two)
+    c1 = (kit_id, part_id, part_one[0], part_two[1], weight_one)
+    part_id += 1
+    c2 = (kit_id, part_id, part_two[0], part_two[1], weight_two)
+    part_id += 1
     stuff = []
     stuff.append(c1)
     stuff.append(c2)
 
-    return total_weight, stuff
+    return total_weight, stuff, part_id
 
-def getLarge(car_parts, kit_id):
+def getLarge(car_parts, kit_id, part_id):
     part_one = car_parts[random.randint(0, len(car_parts) - 1)]
     weight = random.randint(65, 75)
     stuff = []
-    c1 = (kit_id, part_one[0], part_one[1], weight)
+    c1 = (kit_id, part_id, part_one[0], part_one[1], weight)
+    part_id += 1
     stuff.append(c1)
-    return weight, stuff
+    return weight, stuff, part_id
     
     
 

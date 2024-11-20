@@ -70,7 +70,7 @@ CREATE TABLE "RaceCrew_Member" (
 );
 
 CREATE TABLE "KitContents" (
-  "KitID" int PRIMARY KEY NOT NULL,
+  "KitID" int NOT NULL,
   "PartID" int UNIQUE PRIMARY KEY NOT NULL,
   "PartName" text NOT NULL,
   "PartDesc" text NOT NULL,
