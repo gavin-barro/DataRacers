@@ -9,25 +9,27 @@ Team Name: **dr**
 
 The following **4 collections** correspond to the **12 tables** found in [schema.png](schema.png).
 
-* Person
+* Race Event
     * person
     * department
     * college
     * person_workshop
 
-* Workshop
+* Team
     * workshop
     * workshop_timeslot
     * timeslot
 
-* Room
+* Person
     * room
     * room_feature
     * feature
 
-* Event
-    * event
-    * organizer
+* Kit
+    * container_id
+
+* Shipment
+    * 
 
 
 ## The Person Collection
