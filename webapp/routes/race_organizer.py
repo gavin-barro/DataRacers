@@ -18,6 +18,11 @@ def race_organizer():
     elif action == "View and Add Shipments":
         action_send = "shipments"
         data = ship.shipment_all()
+        # Title casing the data
+        data  = [
+            tuple(item.title() if isinstance(item, str) else item for item in row)
+            for row in data
+        ]
     print(action)
     print(data)
     return render_template("raceorganizer.jinja", action=action_send, data=data)
