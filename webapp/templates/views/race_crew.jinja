@@ -175,6 +175,16 @@
 
             var table = new google.visualization.Table(document.getElementById('table_div'));
             table.draw(data, options);
+
+            google.visualization.events.addListener(table, "select", function() {
+                let selection = table.getSelection();
+                let item = selection[0];
+                if (item) {
+                    let id = data.getValue(item.row, 3);
+                    window.location.href = '/container/' + id;
+                }
+            });
+
         }
     </script>
     {% endif %}
