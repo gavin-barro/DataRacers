@@ -10,15 +10,13 @@ Team Name: **dr**
 The following **4 collections** correspond to the **12 tables** found in [schema.png](schema.png).
 
 * Race Event
-    * person
-    * department
-    * college
-    * person_workshop
+    * raceid
+    * location
+    * date
 
 * Team
-    * workshop
-    * workshop_timeslot
-    * timeslot
+    * team
+    * raceevent
 
 * Person
     * room
@@ -32,55 +30,21 @@ The following **4 collections** correspond to the **12 tables** found in [schema
     * 
 
 
-## The Person Collection
+## The Race Event Collection
 
-The department and college data can be stored with the person; once entered, it hardly changes.
-Departments and colleges do not necessarily need to be stored in the database in their own collection(s), because they're used only for lookup for Person data entry.
-The role(s) a person have per event year is stored with the person, because this information will be needed to known what permissions a person has when they log in.
-A link (dbms specific) is stored to the workshop, if the person is connected to a workshop.
+The location, date, and creator are stored in the Race Event Collection. Since race events are usually created in advance, the location and date are predetermined and don't often change (except in rare circumstances). The Creator of the race does not change. 
+A link (dbms specific) is stored to the person who created the event (race event organizer). This is linked with our Person collection.
 
 ```
 {
-    'id': 'elkadima',
-    'email': 'elkadima@jmu.edu',
-    'type': 'faculty',
-    'first_name': 'Mona',
-    'last_name': 'Rizvi',
-    'phone': '15401111111',
-    'department': {
-        'code': 'CS',
-        'name': 'Computer Science,
-        'auh_name': 'Vetria Byrd',
-        'auh_email': 'byrd@jmu.edu',
-        'college': {
-            'code': 'CISE',
-            'name': 'College of Integrated Science and Engineering',
-            'dean_name': 'Jeff Tang',
-            'dean_email': 'tang@jmu.edu',
-        }
-    },
-    roles: [
-        {
-            'year': 2024
-            'role': {
-                'role': 'organizer',
-            },
-        },
-        {
-            'year': 2024
-            'role': {
-                'workshop_id': 321    # DBMS-specific linking mechanism
-                'role': 'lead',
-            },
-        },
-        {
-            'year': 2023
-            'role': {
-                'workshop_id': 299   # DBMS-specific linking mechanism
-                'role': 'lead',
-            },
-        },
-    ]
+    'raceid': '322',
+    'location': 'Canada',
+    'official_name': '2024 Canadian Grand Prix'
+    'date': '03-24-2024',
+    'creator': {
+        'id': '10',              # DBMS-specific linking
+        'name': 'Frances Baguette',
+    }
 }
 ```
 
