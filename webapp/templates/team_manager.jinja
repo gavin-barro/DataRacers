@@ -64,96 +64,13 @@
 </div>
 
 <div style="padding-left:16px">
-    <h2>Race Manager Dashboard</h2>
+    <h2>Team Manager Page</h2>
     <h3>Select Action</h3>
     <form>
     <p style="padding-left:24px">
         <input name="action" type ="submit" value="View and Add Kits" class="styled_button">
-        <input name="action" type="submit" value="View A Teams Kit and Contents" class="styled_button">
+        <input name="action" type="submit" value = "View a teams kit and contents" class="styled_button">
     </p>
     </form>
-</div>
-<div style="padding-left:16px">
-{% if action == ""%}
-    <h3>Races</h3>
-    <div id="table_div"></div>
-    <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['table'] });
-        google.charts.setOnLoadCallback(drawTable);
-
-        function drawTable() {
-            var data = new google.visualization.DataTable();
-
-            data.addColumn('string', 'RaceID');
-            data.addColumn('string', 'Location');
-            data.addColumn('string', 'Date');
-            data.addColumn('string', 'CreatorID');
-
-            data.addRows([
-                {% for row in data %}
-                [{% for value in row %}'{{ value }}', {% endfor %}],
-                {% endfor %}
-            ]);
-
-            var table = new google.visualization.Table(document.getElementById('table_div'));
-            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
-
-            google.visualization.events.addListener(table, "select", function() {
-                let selection = table.getSelection();
-                let item = selection[0];
-                if (item) {
-                    let id = data.getValue(item.row, 0);
-                    window.location.href = 'raceevent/' + id;
-                }
-            });
-        }
-    </script>
-        <p>
-        <button onclick="window.location.href = 'raceevent/new'">Add Race Event</button>
-        </p>
-{%elif action == "shipments"%}
-<div id="table_div"></div>
-    <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['table'] });
-        google.charts.setOnLoadCallback(drawTable);
-
-        function drawTable() {
-            var data = new google.visualization.DataTable();
-
-            data.addColumn('string', 'ShipmentID');
-            data.addColumn('string', 'RaceID');
-            data.addColumn('string', 'CurrentLocatioon');
-            data.addColumn('string', 'Destination');
-            data.addColumn('string', 'Method');
-            data.addColumn('string', 'CreatedBy');
-            data.addColumn('string', 'Status');
-
-            data.addRows([
-                {% for row in data %}
-                [{% for value in row %}'{{ value }}', {% endfor %}],
-                {% endfor %}
-            ]);
-
-            var table = new google.visualization.Table(document.getElementById('table_div'));
-            table.draw(data, { showRowNumber: true, page: true, pageSize: 10 });
-
-            google.visualization.events.addListener(table, "select", function() {
-                let selection = table.getSelection();
-                let item = selection[0];
-                if (item) {
-                    let id = data.getValue(item.row, 0);
-                    window.location.href = 'shipment/' + id;
-                }
-            });
-        }
-    </script>
-        <p>
-        <button onclick="window.location.href = 'shipment/new'">Add Shipment</button>
-    </p>
-
-
-
-{%endif%}
-</div>
 </body>
 </html>

@@ -8,3 +8,4 @@ from . import race_organizer
 from . import racecrew
 from . import about
 from . import contact
+from . import team_manager

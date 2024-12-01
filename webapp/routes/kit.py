@@ -5,5 +5,5 @@ from flask import render_template, request, flash, redirect
 
 @app.route("/kit")
 def show_kit_all():
-    data = db.shipment_all()
+    data = db.kit_all()
     return render_template("kit_all.jinja", data=data)
