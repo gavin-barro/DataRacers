@@ -8,7 +8,7 @@ NUM_TEAMS = 10
 MAX_SMALL = 4
 MAX_MEDIUM = 6
 MAX_LARGE = 8
-MAX_CON = 6010
+MAX_CON = 6100
 sizes = ("small", "medium", "large")
 
 def main():
@@ -101,7 +101,7 @@ def main():
         else:
             total_weight, stuff, part_id = getLarge(car_parts, kit_id, part_id)
         
-        this_kit = (kit_id, random.randint(0, 100), True, team_id, total_weight, cur_size)
+        this_kit = (kit_id, random.randint(1, 100), True, team_id, total_weight, cur_size)
         con.execute('INSERT INTO "Kit" VALUES (%s, %s, %s, %s, %s, %s)', this_kit)
         con.commit()
         for s in stuff:
