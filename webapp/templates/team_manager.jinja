@@ -70,5 +70,10 @@
         <input name="action" type="submit" value = "View a teams kit and contents" class="styled_button">
     </p>
     </form>
+{% if action == "kits"%}
+  <meta http-equiv="refresh" content="0; url=http://127.0.0.1:5000/kit" />
+{% elif action == "tk"%}
+  <meta http-equiv="refresh" content="0; url=http://127.0.0.1:5000/select_team_kits" />
+{%endif%}
 </body>
 </html>
