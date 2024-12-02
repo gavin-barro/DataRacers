@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ "Add" if key == "new" else "Edit" }} Kit</title>
+</head>
+<body>
+    <h1>{{ "Add" if key == "new" else "Edit" }} Current Kit</h1>
+    <p><a href="/">Home</a></p>
+
+    {% for message in get_flashed_messages() %}
+    <p><i>{{ message }}</i></p>
+    {% endfor %}
+
+    <form>
+        <p>
+            KitID:<br>
+            <input name="KitID" type="text" value="{{ values[0] }}">
+        </p>
+        <p>
+            OwnerID:<br>
+            <input name="OwnerID" type="text" value="{{ values[1] }}">
+        </p>
+        <p>
+            TypeOfKit:<br>
+            <input name="TypeOfKit" type="text" value="{{ values[2] }}">
+        </p>
+        <p>
+            TeamID:<br>
+            <input name="TeamID" type="text" value="{{ values[3] }}">
+        </p>
+        <p>
+            KitWeight:<br>
+            <input name="KitWeight" type="text" value="{{ values[4] }}">
+        </p>
+        <p>
+            KitSize:<br>
+            <input name="KitSize" type="text" value="{{ values[5] }}">
+        </p>
+        {% if key == "new" %}
+        <p>
+            <input name="action" type="submit" value="Insert" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+        </p>
+        {% else %}
+        <p>
+            <input name="action" type="submit" value="Update" style="color: green;">
+            <input name="action" type="submit" value="Cancel">
+            <input name="action" type="submit" value="Delete" style="color: red">
+        </p>
+        {% endif %}
+    </form>
+</body>
+</html>
