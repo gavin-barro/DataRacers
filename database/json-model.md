@@ -131,7 +131,7 @@ table connectes the Container to the specific kits that are in the container.
 ```
 
 
-## Kit
+## Kit Collection
 The kit collection contains information about the kits stored in the container. These kits
 contain an ID, the ID of the person who owns it, the ID of a team who owns the kit, the total
 weight of the parts in the kit, and the size of the kit based on the weight.
@@ -155,7 +155,8 @@ weight of the parts in the kit, and the size of the kit based on the weight.
 ```
 
 ## KitContents
-
+The KitContents contains information about the specific part being stored in the Kit. The table contains a ID for the kit it is being stored in, the ID of the part in the kit, the name of the
+part, a short descripition, and the weight of the part(s).
 ```
 {
     "KitID": "7000",
