@@ -67,7 +67,7 @@ The Shipment Collection stores information about the transportation of container
     "destination": "Australian Grand Prix",
     "method": "Submarine",
     "createdby": {
-        "id": "10",  # Linked to the Person Collection
+        "id": "10",  # DBMS specific linking
         "name": "Dragan Scholl"
     },
     "status": "Arrived",
@@ -77,7 +77,7 @@ The Shipment Collection stores information about the transportation of container
             "critical": True,
             "status": "Submarine",
             "updatedby": {
-                "id": "14",  # Linked to the Person Collection
+                "id": "14",  # DBMS specific linking
                 "name": "Chloë Hemma van Allemanië"
             }
         }
