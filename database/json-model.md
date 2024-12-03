@@ -41,7 +41,20 @@ The following **4 collections** correspond to the **12 tables** found in [schema
     * Status
     * UpdatedBy
 
+* Kit
+    * KitID
+    * OwnerID
+    * TypeOfKit
+    * TeamID
+    * TotalWeight
+    * KitSize
 
+* KitContents
+    * KitID
+    * PartID
+    * PartName
+    * PartDesc
+    * PartWeight
 
 
 ## The Race Event Collection
@@ -109,7 +122,6 @@ The Shipment Collection stores information about the transportation of container
 
 
 ## Kit
-
 ```
 {
     "KitID": "7000",
@@ -120,6 +132,16 @@ The Shipment Collection stores information about the transportation of container
 }
 ```
 
+## KitContents
+```
+{
+    "KitID": "7000",
+    "PartID": "1000",
+    "PartName": "Transmission Cover",
+    "PartDesc": "Protects transmission components",
+    "PartWeight": "71"
+}
+```
 
 
 
