@@ -81,7 +81,7 @@
         </p>
     </form>
     <script>
-        init_select("team_id", colleges, "{{ team_id }}");
+        //init_select("team_id", colleges, "{{ team_id }}");
     </script>
 
     {% if data %}
@@ -94,7 +94,6 @@
 
         function drawTable() {
             var data = new google.visualization.DataTable();
-
             data.addColumn('string', 'TeamName');
             data.addColumn('string', 'KitID');
             data.addColumn('string', 'KitSize');
@@ -103,7 +102,7 @@
 
             data.addRows([
                 {% for row in data %}
-                [{% for value in row %}'{{ value }}', {% endfor %}],
+                [{% for value in row %}'{{ value|e}}', {% endfor %}],
                 {% endfor %}
             ]);
 
