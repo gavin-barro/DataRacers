@@ -27,7 +27,13 @@ The following **4 collections** correspond to the **12 tables** found in [schema
     * container_id
 
 * Shipment
-    * 
+    * shipment_id
+    * current_location
+    * destination
+    * method
+    * created_by
+    * status
+
 
 
 ## The Race Event Collection
@@ -51,7 +57,7 @@ A link (dbms specific) is stored to the person who created the event (race event
 
 ## The Shipment Collection
 
-The Shipment Collection stores information about the transportation of containers for a race event. Each shipment includes its current location, destination, and method of transport, which may vary depending on logistical needs. Shipments are linked to the race they support and are created by an organizer, with a (DBMS specific) link to the Person Collection. Containers within the shipment, including critical status and their contents, are nested for easy tracking and management
+The Shipment Collection stores information about the transportation of containers for a race event. Each shipment includes its current location, destination, and method of transport, which may vary depending on logistical needs. Shipments are linked to the race they support and are created by an organizer, with a (DBMS specific) link to the Person Collection. Containers within the shipment, including critical status and their contents, are nested for easy tracking and management.
 
 ```
 {
