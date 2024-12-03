@@ -108,13 +108,17 @@ The Shipment Collection stores information about the transportation of container
 ```
 
 ## The Container collection
+The container collection contains information about the amount of kits in each container.
+These containers contain a id, the id of the shipment that the container is on, the status
+of the container, if it is loaded or not, and who it was updated by. The ContainerContents 
+table connectes the Container to the specific kits that are in the container.
 
 ```
 {
     "ConID": "6000",
     "ShipmentID": "5000",
     "CriticalContainer": "True",
-    "Status": "Submarine",
+    "Status": "Arrived",
     "method": "In-Transit",
     "UpdatedBy": 0,
     "ContainerContents": 
