@@ -112,7 +112,6 @@ The container collection contains information about the amount of kits in each c
 These containers contain a id, the id of the shipment that the container is on, the status
 of the container, if it is loaded or not, and who it was updated by. The ContainerContents 
 table connectes the Container to the specific kits that are in the container.
-
 ```
 {
     "ConID": "6000",
@@ -133,6 +132,9 @@ table connectes the Container to the specific kits that are in the container.
 
 
 ## Kit
+The kit collection contains information about the kits stored in the container. These kits
+contain an ID, the ID of the person who owns it, the ID of a team who owns the kit, the total
+weight of the parts in the kit, and the size of the kit based on the weight.
 ```
 {
     "KitID": "7000"
@@ -153,6 +155,7 @@ table connectes the Container to the specific kits that are in the container.
 ```
 
 ## KitContents
+
 ```
 {
     "KitID": "7000",
@@ -163,56 +166,3 @@ table connectes the Container to the specific kits that are in the container.
 }
 ```
 
-
-
-## The Room Collection
-
-The room, department, and college data could be stored in their own collections to serve as lookup tables, but they hardly change and could be managed some other way.
-The timeslot data for the day's schedule also may or may not be stored in a collection.
-Room is shown as an example collection below.
-
-```
-{
-    'name': 'ENGEO 2204',
-    'type': 'computer lab',
-    'capacity': 32,
-    'features': [
-        {
-            'name': 'lab',
-            'description': '32 Linux Mint desktops',
-        },
-        {
-            'name': 'instructor computer',
-            'description': '1 Linux Mint desktop',
-        },
-        {
-            'name': 'projector',
-            'description': 'connection from instructor computer or HDMI',
-        },
-    ]
-}
-```
-
-
-## The Event Collection
-
-Finally, each event stores the date and the conference organizers.
-The year is stored separately (and redundant), given the year is used in so many instances in the application.
-
-```
-{
-    'id': 5,
-    'year': 2024,
-    'date': '2024-03-23',
-    'organizers': [
-        {
-            'person': 'lam2mo',       # DBMS-specific linking mechanism
-            'roles': ['co-chairperson', 'volunteer team'],
-        },
-        {
-            'person': 'elkadima',       # DBMS-specific linking mechanism
-            'roles': ['workshop team'],
-        },
-    ]
-}
-```
