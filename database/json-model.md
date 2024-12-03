@@ -116,7 +116,14 @@ The Shipment Collection stores information about the transportation of container
     "CriticalContainer": "True",
     "Status": "Submarine",
     "method": "In-Transit",
-    "UpdatedBy": 0
+    "UpdatedBy": 0,
+    "ContainerContents": 
+    [
+        "ContainerContents": {
+            "ConID": "6000",
+            "KitID": "7000"
+        }
+    ]
 }
 ```
 
@@ -124,11 +131,20 @@ The Shipment Collection stores information about the transportation of container
 ## Kit
 ```
 {
-    "KitID": "7000",
+    "KitID": "7000"
     "OwnerID": "2",
     "TeamID": "1",
     "TotalWeight": "71",
-    "KitSize": "large"
+    "KitSize": "large", 
+    [
+        "KitContents": {
+        "KitID": "7000",
+        "PartID": "10000",
+        "PartName": "Transmission cover",
+        "PartDesc": "Protects transmission componets",
+        "PartWeight": "71"
+        }
+    ]
 }
 ```
 
