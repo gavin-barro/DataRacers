@@ -49,53 +49,35 @@ A link (dbms specific) is stored to the person who created the event (race event
 ```
 
 
-## The Workshop Collection
+## The Shipment Collection
 
-The room name can be stored directly in the workshop.
-The list of rooms, including department and college information, hardly changes and may not even need to be stored---it's just used for lookup.
-The list of people involved can just be minimal, but this duplication may be helpful.
-A link to the full Person data is not required from this direction, but may be stored anyway.
+The Shipment Collection stores information about the transportation of containers for a race event. Each shipment includes its current location, destination, and method of transport, which may vary depending on logistical needs. Shipments are linked to the race they support and are created by an organizer, with a (DBMS specific) link to the Person Collection. Containers within the shipment, including critical status and their contents, are nested for easy tracking and management
 
 ```
 {
-    'id': 299,
-    'state': 'accepted',
-    'title': 'Create your own game!',
-    'advertisement': 'Create your own game using Scratch...',
-    'description': 'Students will use Scratch to develop a fish game...',
-    'capacity': 15,
-    'computer_needs': 'Each student needs a computer.',
-    'room_needs': 'Computer lab is best, or laptops',
-    'max_repeat': 3
-    'parent_questions': 'Ask you child to show your their game on the Scratch site.',
-    'other_information': 'N/A',
-    'event_year': 2023,
-    'room_name': 'ENGEO 2204',
-    'timeslots': [
+    "shipmentid": "5002",
+    "raceid": "1100",
+    "currentlocation": "Saudian Arabian Grand Prix",
+    "destination": "Australian Grand Prix",
+    "method": "Submarine",
+    "createdby": {
+        "id": "10",  # Linked to the Person Collection
+        "name": "Dragan Scholl"
+    },
+    "status": "Arrived",
+    "containers": [
         {
-            'start': '9:30',
-            'end': '10:30',
-        },
-        {
-            'start': '13:20',
-            'end': '13:40',
+            "conid": "6020",
+            "critical": True,
+            "status": "Submarine",
+            "updatedby": {
+                "id": "14",  # Linked to the Person Collection
+                "name": "Chloë Hemma van Allemanië"
+            }
         }
     ]
-    people: [
-        {
-            'name': 'Mona Rizvi',
-            'phone': '17571111111',
-            'role': 'lead',
-            'id': 'elkadima',    # DBMS-specific linking mechanism
-        },
-        {
-            'name': 'Mariya Rizvi',
-            'phone': '17572222222',
-            'role': 'volunteer',
-            'id': 'rizvi',       # DBMS-specific linking mechanism
-        },
-    ]
 }
+
 ```
 
 
