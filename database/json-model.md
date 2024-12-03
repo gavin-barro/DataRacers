@@ -34,6 +34,14 @@ The following **4 collections** correspond to the **12 tables** found in [schema
     * created_by
     * status
 
+* Container
+    * ConID
+    * ShipmentID
+    * CriticalContainer
+    * Status
+    * UpdatedBy
+
+
 
 
 ## The Race Event Collection
@@ -85,6 +93,34 @@ The Shipment Collection stores information about the transportation of container
 }
 
 ```
+
+## The Container collection
+
+```
+{
+    "ConID": "6000",
+    "ShipmentID": "5000",
+    "CriticalContainer": "True",
+    "Status": "Submarine",
+    "method": "In-Transit",
+    "UpdatedBy": 0
+}
+```
+
+
+## Kit
+
+```
+{
+    "KitID": "7000",
+    "OwnerID": "2",
+    "TeamID": "1",
+    "TotalWeight": "71",
+    "KitSize": "large"
+}
+```
+
+
 
 
 ## The Room Collection
