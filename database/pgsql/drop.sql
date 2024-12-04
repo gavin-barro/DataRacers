@@ -1,5 +1,4 @@
 DROP VIEW IF EXISTS "RaceTeamShipmentView" CASCADE;
-DROP VIEW IF EXISTS "upcomingcriticalshipments2024" CASCADE;
 DROP VIEW IF EXISTS "upcomingcriticalshipments" CASCADE;
 DROP VIEW IF EXISTS "OverweightKits" CASCADE;
 
