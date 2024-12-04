@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ "Add" if key == "new" else "Edit" }} Shipment</title>
+    <title>{{ "Add" if key == "new" else "Edit" }} Workshop</title>
     <style>
         body {
         margin: 0;
@@ -53,7 +53,7 @@
   <a href="/about">About</a>
   <a href="/test">Test</a>
 </div>
-    <h1 style="padding-left:16px">{{ "Add" if key == "new" else "Edit" }} Shipment</h1>
+    <h1 style="padding-left:16px">{{ "Add" if key == "new" else "Edit" }} Workshop</h1>
 
     {% for message in get_flashed_messages() %}
     <p><i>{{ message }}</i></p>
@@ -62,27 +62,27 @@
     <form class="formblock">
         <p>
             ShipmentID:<br>
-            <input name="ID" type="text" value="{{ values[0] }}" readonly>
+            <input name="ID" type="text" value="{{ values[0] }}">
         </p>
         <p>
             RaceID:<br>
-            <input name="State" type="text" value="{{ values[1] }}" readonly>
+            <input name="State" type="text" value="{{ values[1] }}">
         </p>
         <p>
             CurrentLocation:<br>
-            <input name="Title" type="text" value="{{ values[2] }}" readonly>
+            <input name="Title" type="text" value="{{ values[2] }}">
         </p>
         <p>
             Destination:<br>
-            <input name="Advertisement" type="text" value="{{ values[3] }}" readonly>
+            <input name="Advertisement" type="text" value="{{ values[3] }}">
         </p>
         <p>
             Method:<br>
-            <input name="Description" type="text" value="{{ values[4] }}" readonly>
+            <input name="Description" type="text" value="{{ values[4] }}">
         </p>
         <p>
             CreatedBy:<br>
-            <input name="Capacity" type="text" value="{{ values[5] }}" readonly>
+            <input name="Capacity" type="text" value="{{ values[5] }}">
         </p>
         <p>
             Status:<br>
@@ -97,7 +97,8 @@
         {% else %}
         <p>
             <input name="action" type="submit" value="Update" style="color: green;">
-            <a href="/race_crew">Back</a>
+            <input name="action" type="submit" value="Cancel">
+            <input name="action" type="submit" value="Delete" style="color: red">
         </p>
         {% endif %}
     </form>
