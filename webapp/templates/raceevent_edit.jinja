@@ -1,9 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ "Add" if key == "new" else "Edit" }} Race Event</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+       body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+    overflow: hidden;
+    background-color: #CBB677;
+    }
+
+    .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    }
+
+    .topnav a.active {
+    background-color: #450084;
+    color: white;
+    }
+    .styled_button {
+    background-color: #450084; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  .styled_button:active {
+    background-color: #CBB677; /* Darker green on active (click) */
+    transform: scale(0.98);     /* Slight shrink on click */
+}
+</style>
 </head>
 <body>
+
+<div class="topnav">
+  <a href="/">Home</a>
+  <a href="/raceorganizer">Race Organizer</a>
+  <a href="/race_crew">Shipment Manager</a>
+  <a  class="active" href="/team_manager">Team Manager</a>
+  <a href="/contact">Contact Us</a>
+  <a href="/about">About</a>
+  <a href="/test">Test</a>
+</div>
     <h1>{{ "Add" if key == "new" else "Edit" }} Race Event</h1>
 
     {% for message in get_flashed_messages() %}
