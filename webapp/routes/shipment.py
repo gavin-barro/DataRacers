@@ -31,11 +31,11 @@ def shipment_edit(key):
             flash("Person inserted")
         elif action == "Update":
             db.shipment_upd(key, values)
-            flash("Person updated")
+            flash("Shipment updated")
         elif action == "Delete":
             db.person_del(key)
             flash("Person deleted")
     except Exception as e:
         flash(str(e))
         return render_template("shipment_edit.jinja", key=key, values=values)
-    return redirect("/shipment")
+    return redirect("/race_crew")

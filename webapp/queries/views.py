@@ -67,7 +67,8 @@ def racecrew_kitview(race_year, location):
 re."Location",
 re."Date",
 s."Status" AS "Shipment Status",
-c."ConID" AS "ContainerID"
+c."ConID" AS "ContainerID",
+s."ShipmentID"
 FROM "Race_Event" re
 	JOIN "Shipment" s ON re."RaceID" = s."RaceID"
 	JOIN "Container" c ON s."ShipmentID" = c."ShipmentID"
@@ -75,3 +76,4 @@ WHERE re."Date" BETWEEN %s
 		AND %s 
 		AND "Location" = %s""", (f"{race_year}-01-01", f"{race_year}-12-31", f'{location}'))
             return cur.fetchall()
+

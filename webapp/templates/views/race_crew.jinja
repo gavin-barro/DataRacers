@@ -147,6 +147,7 @@
             data.addColumn('string', 'Date');
             data.addColumn('string', 'Shipment Status');
             data.addColumn('string', 'ContainerID');
+            data.addColumn('string', 'ShipmentID');
 
             data.addRows([
                 {% for row in data %}
@@ -178,8 +179,8 @@
                 let selection = table.getSelection();
                 let item = selection[0];
                 if (item) {
-                    let id = data.getValue(item.row, 3);
-                    window.location.href = '/container/' + id;
+                    let id = data.getValue(item.row, 4);
+                    window.location.href = '/shipment/' + id;
                 }
             });
 
