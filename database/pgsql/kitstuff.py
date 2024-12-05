@@ -8,7 +8,7 @@ NUM_TEAMS = 10
 MAX_SMALL = 4
 MAX_MEDIUM = 6
 MAX_LARGE = 8
-MAX_CON = 6100
+MAX_CON = 6459
 sizes = ("small", "medium", "large")
 
 def main():
