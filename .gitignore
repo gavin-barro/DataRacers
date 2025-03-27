@@ -18,3 +18,7 @@ env/
 venv/
 webapp/templates/schema.png
 webapp/templates/about.jinja
+
+# files
+password.txt
+feedback/
