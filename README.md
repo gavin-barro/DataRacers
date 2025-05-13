@@ -1,4 +1,4 @@
-# CS374 Database Project Proposal
+# CS 374: Database Project Proposal
 
 Project Title: **Formula One Logistical Database (F1LDB)**
 
